@@ -5,29 +5,14 @@
 <div class="container-fluid">
   <div class="row main-content bg-success text-center">
     <div class="col-md-4 text-center company__info">
-      <img src="static/assets/images/marmut.png" alt="login" class="login-card-img">
-      <h4 class="website_title">Marmut</h4>
+      <img src="/static/assets/images/marmut.png" alt="login" class="login-card-img">
     </div>
     <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
       <div class="container-fluid">
-        <div class="row">
-          <h2>Log In</h2>
-        </div>
-        <div class="row">
-          <form control="" class="form-group">
-            <div class="row">
-              <input type="text" name="username" id="username" class="form__input" placeholder="Username">
-            </div>
-            <div class="row">
-              <input type="password" name="password" id="password" class="form__input" placeholder="Password">
-            </div>
-            <div class="row">
-              <input type="submit" value="Submit" class="btn">
-            </div>
-          </form>
-        </div>
-        <div class="row">
-          <p>Don't have an account? <a href="#">Register Here</a></p>
+        <div class="row btn-container">
+          <h2>Marmut</h2>
+          <a href="{% url 'authentication:login' %}"><input type="submit" value="Login" class="btn"></a>
+          <a href="{% url 'authentication:register' %}"><input type="submit" value="Register" class="btn"></a>
         </div>
       </div>
     </div>

@@ -65,6 +65,12 @@ form{
 	box-shadow: 0 0 5px rgba(0,80,80,.4);
 	border-radius: 4px;
 }
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 .btn{
 	transition: all .5s ease;
 	width: 70%;
@@ -75,7 +81,6 @@ form{
 	border: 1px solid #996f59;
 	margin-top: 1.5em;
 	margin-bottom: 1em;
-	margin-left: 6em;
 }
 .btn:hover, .btn:focus{
 	background-color: #996f59;
