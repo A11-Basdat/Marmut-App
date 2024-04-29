@@ -23,10 +23,15 @@
 		border-top-left-radius:20px;
 		border-bottom-left-radius:20px;
 	}
+
 }
 @media screen and (min-width: 642px) and (max-width:800px){
-	.main-content{width: 70%;}
+ 	.main-content{width: 70%;}
+ }
+.main-content-reg{
+    width:640px;
 }
+
 .row > h2{
 	color:#996f59;
 }
@@ -36,6 +41,13 @@
 	border-bottom-right-radius:20px;
 	border-top:1px solid #ccc;
 	border-right:1px solid #ccc;
+}
+.register_form {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    justify-content: center;
+    color: #fff;
 }
 form{
 	padding: 0 2em;

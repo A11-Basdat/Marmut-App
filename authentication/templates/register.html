@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row main-content bg-success text-center">
+        <div class="register_form">
+            <div class="container-fluid">
+                <div class="row">
+                    <h2>Register</h2>
+                </div>
+                <div class="row">
+                    <form control="" class="form-group">
+                        <div class="row">
+                            <input type="text" name="username" id="username" class="form__input" placeholder="Username">
+                        </div>
+                        <div class="row">
+                            <input type="password" name="password" id="password" class="form__input" placeholder="Password">
+                        </div>
+                        <div class="row">
+                            <input type="submit" value="Submit" class="btn">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
