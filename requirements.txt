@@ -1,0 +1,11 @@
+django
+gunicorn
+whitenoise
+psycopg2-binary
+requests
+urllib3
+fontawesomefree==5.15.4
+djangorestframework
+django-environ
+whitenoise
+django-cors-headers
