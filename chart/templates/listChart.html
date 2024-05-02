@@ -5,7 +5,7 @@
 <div class="my-2 mx-5 fc-primary">
     <div>
         <div class="">
-            <h1 class="fw-bold mb-0">Chart List</h1>
+            <h1 class="fw-bold mb-0 ">Chart List</h1>
         </div> 
         
         <button type="button" class="btn btn-primary my-3" style="border-radius: 10px; width: 10%;">Kembali</button>
@@ -14,18 +14,19 @@
     <div class="d-flex gap-3"> 
         <div class="card" style="width: 18rem;">
             <div class="card-body d-flex flex-column justify-content-between gap-3">
-                <div>
+                <div class=" fc-primary">
                     <h2 class="card-title fw-bold">Daily Top 20</h2>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-primary m-0" style="border-radius: 10px; width: 100%;">Lihat Daftar Lagu</button>
+                    <a href="{% url 'chart:detail_chart' %}">
+                    <button type="button" class="btn btn-primary m-0" style="border-radius: 10px; width: 100%;">Lihat Daftar Lagu</button></a>
                 </div>
             </div>
         </div> 
         <div class="card" style="width: 18rem;">
             <div class="card-body d-flex flex-column justify-content-between gap-3">
-                <div>
+                <div class=" fc-primary">
                     <h2 class="card-title fw-bold">Weekly Top 20</h2>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
@@ -36,7 +37,7 @@
         </div> 
         <div class="card" style="width: 18rem;">
             <div class="card-body d-flex flex-column justify-content-between gap-3">
-                <div>
+                <div class="fc-primary">
                     <h2 class="card-title fw-bold">Top 50 - Indonesia</h2>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
