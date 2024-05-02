@@ -22,5 +22,6 @@ urlpatterns = [
     path('podcast/', include('podcast.urls')),
     path('', include('base.urls')),
     path('authentication/', include('authentication.urls')),
-    path('dashboard/', include('dashboard.urls'))
+    path('dashboard/', include('dashboard.urls')),
+    path('chart/', include('chart.urls')),
 ]
