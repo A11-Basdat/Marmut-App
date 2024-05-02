@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'base',
     'authentication',
     'dashboard',
-    'user'
+    'user',
+    'podcast',
+    'chart',
 ]
 
 MIDDLEWARE = [
