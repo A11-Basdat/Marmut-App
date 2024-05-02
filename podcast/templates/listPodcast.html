@@ -15,10 +15,13 @@
                         <div class="w-100">
                             <h5 class="card-title fw-semibold ">Stuff You Should Know</h5>
                             <p class="card-text">Explore fascinating facts and intriguing topics in a digestible format, making learning both easy and entertaining.</p>
-                            <button type="button" class="btn btn-primary m-0" style="border-radius: 10px; width: 30%;">Lihat Episode</button>
+                            <a href="{% url 'podcast:list_episode' %}">
+                            <button type="button" class="btn btn-primary m-0" style="border-radius: 10px; width: 30%;">Lihat Episode</button></a>   
                         </div>
                         <div>
-                            <button type="button" class="btn btn-blue m-0 mb-2" style="border-radius: 10px; width: 100%;">Tambah Episode</button>
+                            <a href="{% url 'podcast:create_episode' %}">
+                                <button type="button" class="btn btn-blue m-0 mb-2" style="border-radius: 10px; width: 100%;">Tambah Episode</button>
+                            </a>
                             <button type="button" class="btn btn-red m-0" style="border-radius: 10px; width: 100%;">Hapus</button>
                         </div>
                     </div>
