@@ -9,6 +9,7 @@
                 <div class="row">
                     <h2>List Album</h2>
                 </div>
+                <br>
                 <div class="row">
                     <table class="min-w-full text-sm font-dark overflow-hidden" style="color:#996f59">
                         <tbody>
@@ -25,8 +26,8 @@
                             <td class="whitespace-nowrap px-6 py-4">0</td>
                             <td class="whitespace-nowrap px-6 py-4">0 menit</td>
                             <td class="whitespace-nowrap px-6 py-4">
-                                <a href="{% url 'song:song' %}"><input type="submit" value="Lihat Daftar Lagu" class="btn"></a>
-                                <a href="{% url 'song:create_song' %}"><input type="submit" value="Tambah Lagu" class="btn"></a>
+                                <a href="{% url 'song:song' %}"><input type="submit" value="Lihat Daftar Lagu" class="btn"></a> <br>
+                                <a href="{% url 'song:create_song' %}"><input type="submit" value="Tambah Lagu" class="btn"></a> <br>
                                 <a href="#"><input type="submit" value="Hapus" class="btn"></a>
                             </td>
                         </tr>
@@ -36,8 +37,8 @@
                             <td class="whitespace-nowrap px-6 py-4">0</td>
                             <td class="whitespace-nowrap px-6 py-4">4 menit</td>
                             <td class="whitespace-nowrap px-6 py-4">
-                                <a href="{% url 'song:song' %}"><input type="submit" value="Lihat Daftar Lagu" class="btn"></a>
-                                <a href="{% url 'song:create_song' %}"><input type="submit" value="Tambah Lagu" class="btn"></a>
+                                <a href="{% url 'song:song' %}"><input type="submit" value="Lihat Daftar Lagu" class="btn"></a> <br>
+                                <a href="{% url 'song:create_song' %}"><input type="submit" value="Tambah Lagu" class="btn"></a> <br>
                                 <a href="#"><input type="submit" value="Hapus" class="btn"></a>
                             </td>
                         </tr>
@@ -51,7 +52,8 @@
                     </table>
                     <div class="row btn-container">
                         <a href="{% url 'album:create_album' %}"><input type="submit" value="Create Album" class="btn"></a>
-                </div> <a href="{% url 'album:album_label' %}"><input type="submit" value="Album Label(Temp)" class="btn"></a>
+                        <a href="{% url 'album:album_label' %}"><input type="submit" value="Album Label(Temp)" class="btn"></a>
+                </div>
                 </div>
             </div>
         </div>
@@ -63,7 +65,14 @@
     td {
     border-width: 2px;
     border-color: #996f59;
+    padding:0em;
 }
+
+    .btn {
+    width:50%;
+    margin: 0.5em;
+    }
+
 </style>
 
 {% endblock content %}
