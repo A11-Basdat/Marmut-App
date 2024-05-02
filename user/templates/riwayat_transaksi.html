@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Content -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Langganan Paket</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Paket Basic</h5>
+                                <p class="card-text">Deskripsi Paket Basic.</p>
+                                <button class="btn btn-primary">Langganan Sekarang</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Paket Standard</h5>
+                                <p class="card-text">Deskripsi Paket Standard.</p>
+                                <button class="btn btn-primary">Langganan Sekarang</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Paket Premium</h5>
+                                <p class="card-text">Deskripsi Paket Premium.</p>
+                                <button class="btn btn-primary">Langganan Sekarang</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Riwayat Transaksi</h5>
+                        <p class="card-text">Lihat riwayat transaksi langganan paket Anda.</p>
+                        <a href="#" class="btn btn-info">Lihat Riwayat</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
