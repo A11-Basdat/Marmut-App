@@ -8,3 +8,6 @@ def list_podcast(request):
 
 def create_episode(request):
     return render(request, "createEpisode.html")
+
+def list_episode(request):
+    return render(request, "listEpisode.html")
