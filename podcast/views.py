@@ -11,3 +11,6 @@ def create_episode(request):
 
 def list_episode(request):
     return render(request, "listEpisode.html")
+
+def play_podcast(request):
+    return render(request, "detailPodcast.html")
