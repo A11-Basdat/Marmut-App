@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'user',
     'podcast',
     'chart',
-    'song'
+    'song',
+    'album',
+    'song',
+    'royalti'
 ]
 
 MIDDLEWARE = [
