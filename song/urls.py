@@ -1,5 +1,4 @@
 from django.urls import path
-from song.views import
 from song.views import downloaded_song, create_song, song
 
 app_name = 'song'

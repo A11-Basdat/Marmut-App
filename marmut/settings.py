@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'chart',
     'song',
     'album',
-    'song',
     'royalti'
 ]
 
