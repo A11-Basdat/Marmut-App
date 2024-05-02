@@ -119,3 +119,7 @@ form{
     color: #ffffff;            /* White text */
     border: 1px solid #0004ff; /* Darker red border */
 }
+
+.fc-primary {
+    color: #996f59;
+}
