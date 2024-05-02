@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'authentication',
-    'dashboard'
+    'dashboard',
+    'album',
+    'song',
+    'royalti'
 ]
 
 MIDDLEWARE = [

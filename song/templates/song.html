@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row main-content bg-success text-center">
+        <div class="register_form">
+            <div class="container-fluid">
+                <div class="row">
+                    <h2>Daftar Lagu pada Album1</h2>
+                </div>
+                <div class="row">
+                    <table class="min-w-full text-sm font-dark overflow-hidden" style="color:#996f59; border-color: #996f59; border-width: 4px;">
+                        <tbody>
+                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59" >
+                            <td class="whitespace-nowrap px-6 py-4">Judul</td>
+                            <td class="whitespace-nowrap px-6 py-4">Durasi</td>
+                            <td class="whitespace-nowrap px-6 py-4">Total Play</td>
+                            <td class="whitespace-nowrap px-6 py-4">Total Download</td>
+                            <td class="whitespace-nowrap px-6 py-4">Action</td>
+                        </tr>
+                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
+                            <td class="whitespace-nowrap px-6 py-4">Lagu1</td>
+                            <td class="whitespace-nowrap px-6 py-4">2 menit</td>
+                            <td class="whitespace-nowrap px-6 py-4">3</td>
+                            <td class="whitespace-nowrap px-6 py-4">0</td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                <a href="#"><input type="submit" value="Lihat Detail" class="btn"></a>
+                                <a href="#"><input type="submit" value="Hapus" class="btn"></a>
+                            </td>
+                        </tr>
+                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
+                            <td class="whitespace-nowrap px-6 py-4">Lagu2</td>
+                            <td class="whitespace-nowrap px-6 py-4">3 menit</td>
+                            <td class="whitespace-nowrap px-6 py-4">2</td>
+                            <td class="whitespace-nowrap px-6 py-4">2</td>
+                            <td class="whitespace-nowrap px-6 py-4">
+                                <a href="#"><input type="submit" value="Lihat Detail" class="btn"></a>
+                                <a href="#"><input type="submit" value="Hapus" class="btn"></a>
+                            </td>
+                        </tr>
+                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
+                            <td class="whitespace-nowrap px-6 py-4">...</td>
+                            <td class="whitespace-nowrap px-6 py-4">...</td>
+                            <td class="whitespace-nowrap px-6 py-4">...</td>
+                            <td class="whitespace-nowrap px-6 py-4">...</td>
+                            <td class="whitespace-nowrap px-6 py-4">...</td>
+                        </tr>
+                    </table>
+                    <div class="row btn-container">
+                        <a href="{% url 'song:create_song' %}"><input type="submit" value="Create Lagu" class="btn"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    td {
+    border-width: 2px;
+    border-color: #996f59;
+}
+</style>
+
+{% endblock content %}

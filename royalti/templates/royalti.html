@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row main-content bg-success text-center">
+        <div class="register_form">
+            <div class="container-fluid">
+                <div class="row">
+                    <h2>List Royalti</h2>
+                </div>
+                <div class="row">
+                    <table class="min-w-full text-sm font-dark overflow-hidden" style="color:#996f59">
+                        <tbody>
+                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
+                            <td class="whitespace-nowrap px-6 py-4">Judul Lagu</td>
+                            <td class="whitespace-nowrap px-6 py-4">Judul Album</td>
+                            <td class="whitespace-nowrap px-6 py-4">Total Play</td>
+                            <td class="whitespace-nowrap px-6 py-4">Total Download</td>
+                            <td class="whitespace-nowrap px-6 py-4">Total Royalti Didapat</td>
+                        </tr>
+                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
+                            <td class="whitespace-nowrap px-6 py-4">Lagu1</td>
+                            <td class="whitespace-nowrap px-6 py-4">Album1</td>
+                            <td class="whitespace-nowrap px-6 py-4">3</td>
+                            <td class="whitespace-nowrap px-6 py-4">0</td>
+                            <td class="whitespace-nowrap px-6 py-4">Rp 450000</td>
+                        </tr>
+                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
+                            <td class="whitespace-nowrap px-6 py-4">Lagu2</td>
+                            <td class="whitespace-nowrap px-6 py-4">Album2</td>
+                            <td class="whitespace-nowrap px-6 py-4">2</td>
+                            <td class="whitespace-nowrap px-6 py-4">2</td>
+                            <td class="whitespace-nowrap px-6 py-4">Rp 520000</td>
+                        </tr>
+                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
+                            <td class="whitespace-nowrap px-6 py-4">...</td>
+                            <td class="whitespace-nowrap px-6 py-4">...</td>
+                            <td class="whitespace-nowrap px-6 py-4">...</td>
+                            <td class="whitespace-nowrap px-6 py-4">...</td>
+                            <td class="whitespace-nowrap px-6 py-4">...</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    td {
+    border-width: 2px;
+    border-color: #996f59;
+}
+</style>
+
+{% endblock content %}
