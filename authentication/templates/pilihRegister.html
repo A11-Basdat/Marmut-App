@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row main-content bg-success text-center">
+        <div class="col-md-4 text-center company__info">
+            <img src="/static/assets/images/marmut.png" alt="login" class="login-card-img">
+        </div>
+        <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+            <div class="container-fluid">
+                <div class="row btn-container">
+                    <h2>Marmut</h2>
+                    <a href="{% url 'authentication:register' user_type='pengguna' %}" class="btn">Pengguna</a>
+                    <a href="{% url 'authentication:register' user_type='label' %}" class="btn">Label</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
