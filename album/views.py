@@ -6,3 +6,8 @@ def create_album(request):
 def album(request):
     return render(request, 'album.html')
 
+def album_label(request):
+    return render(request, 'albumLabel.html')
+
+
+
