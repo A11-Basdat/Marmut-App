@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+    <div class="p-3 rounded w-50 m-auto bg-white fc-primary">
+        <div class="container mt-5">
+            <h2 class="text-center">User Playlist</h2>
+            <div class="mt-4">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Judul</th>
+                            <th scope="col">Jumlah Lagu</th>
+                            <th scope="col">Total Durasi</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>tes</td>
+                            <td>0</td>
+                            <td>0 Menit</td>
+                            <td><a style="width: 25%;" href="" class="btn btn-secondary">Detail</a><a style="width: 25%;" href="" class="btn btn-secondary">Ubah</a><a style="width: 25%;" href="" class="btn btn-secondary">Hapus</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div  class="row justify-content-center">
+            <a style="width: 25%;" href="" class="btn btn-secondary">Tambah Playlist</a>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

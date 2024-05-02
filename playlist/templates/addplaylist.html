@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+    <div class="p-3 rounded w-50 m-auto bg-white fc-primary">
+        <div class="pb-3">
+            <h1 class="fw-bold">Tambah Playlist</h1>
+        </div>
+        <div class="mb-2 row">
+            <label class="col-sm-1 col-form-label fw-semibold">Judul</label>
+            <div class="col-sm-11">
+                <input class="form-control" type="text" aria-label="default input example">
+            </div>
+        </div>
+        <div class="mb-2 row">
+            <label class="col-sm-1 col-form-label fw-semibold">Deskripsi</label>
+            <div class="col-sm-11">
+                <input class="form-control" type="text" aria-label="default input example">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <a style="width: 25%;" href="" class="btn btn-secondary">Submit</a>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}
