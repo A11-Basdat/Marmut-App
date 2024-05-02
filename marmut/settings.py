@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'base',
     'authentication',
     'dashboard',
+    'user',
+    'podcast',
+    'chart',
+    'song',
     'album',
     'song',
     'royalti'

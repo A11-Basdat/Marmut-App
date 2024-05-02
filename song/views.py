@@ -6,3 +6,5 @@ def create_song(request):
 def song(request):
     return render(request, 'song.html')
 
+def downloaded_song(request):
+    return render(request, "downloaded_song.html")

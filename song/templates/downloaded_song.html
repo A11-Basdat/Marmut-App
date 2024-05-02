@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Downloaded Songs -->
+    <div class="container mt-5">
+        <h2 class="text-center">DOWNLOADED SONGS</h2>
+        <div class="row mt-4">
+            <div class="col">
+                <h4 class="text-center">Daftar Lagu</h4>
+                <table style="Width:75%", class="table table-bordered table-striped text-center mx-auto">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="col-1">Judul Lagu</th>
+                            <th scope="col" class="col-1">Oleh</th>
+                            <th scope="col" class="col-1">Tanggal Download</th>
+                            <th scope="col" class="col-1">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Song1</td>
+                            <td>Artist1</td>
+                            <td>20/02/2024</td>
+                            <td>
+                                <a class="text-decoration-none font-weight-bold">Lihat</a>
+                                <a class="text-decoration-none font-weight-bold">Hapus</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Song2</td>
+                            <td>Artist2</td>
+                            <td>21/03/2024</td>
+                            <td>
+                                <a class="text-decoration-none font-weight-bold">Lihat</a>
+                                <a class="text-decoration-none font-weight-bold">Hapus</a>
+                            </td>
+                        </tr>
+                        <!-- Other songs -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <a style="width: 25%;" href="" class="btn btn-secondary">Kembali</a>
+        </div>
+    </div>
+{% endblock content %}
