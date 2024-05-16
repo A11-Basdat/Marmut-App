@@ -36,9 +36,9 @@ def detail_chart(request, chart_id):
                 akun ak ON a.email_akun = ak.email
             WHERE 
                 c.id_playlist = '{chart_id}'
-
             ORDER BY 
-                s.total_play DESC;
+                s.total_play DESC
+            LIMIT 20;
     """)
 
     results = cursor.fetchall()
@@ -56,7 +56,5 @@ def detail_chart(request, chart_id):
                 for _, judul, artist, tanggal_rilis, total_play, id_konten in results
             ]
     }
-
-    print(songs)
 
     return render(request, "detailChart.html", songs)
