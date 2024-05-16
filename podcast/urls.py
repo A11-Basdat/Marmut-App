@@ -8,6 +8,6 @@ urlpatterns = [
     path('all-podcast/', list_podcast, name='list_podcast'),
     path('create-episode/', create_episode, name='create_episode'),
     path('all-episode/', list_episode, name='list_episode'),
-    path('detail/', play_podcast, name='play_podcast'),
+    path('play/<uuid:podcast_id>/', play_podcast, name='play_podcast'),
 ]
 
