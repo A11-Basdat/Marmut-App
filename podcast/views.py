@@ -165,3 +165,13 @@ def delete_episode(request, episode_id):
             """)
     
     return redirect(reverse('podcast:list_episode', args=[str(results[0][0])]))
+
+def delete_podcast(request, podcast_id):
+    cursor = connection.cursor()
+    cursor.execute(f"""
+                DELETE
+                FROM KONTEN
+                WHERE id = '{podcast_id}';
+            """)
+    
+    return redirect(reverse('podcast:list_podcast'))
