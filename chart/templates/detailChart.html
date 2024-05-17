@@ -6,91 +6,29 @@
     <div>
         <div class="pb-3">
             
-            <h1 class="fw-bold">Daily Top 20</h1>
+            <h1 class="fw-bold">{{judul_playlist}}</h1>
             
         </div> 
     </div>
     <div class="d-flex flex-column gap-2"> 
+        {% for song in songs %}
         <div class="card-body d-flex justify-content-between gap-5 bg-white p-3 rounded align-items-center">
             <div class="d-flex gap-3">
                 <div class="d-flex align-items-center ">
-                    <h1 class="fw-bolder">1</h1>
+                    <h1 class="fw-bolder">{{ forloop.counter }}</h1>
                 </div>
                 <div class="w-100">
-                    <h5 class="card-title fw-semibold">The Hidden World of Subterranean Cities</h5>
-                    <p class="card-text m-0 fw-semibold">NIKI</p>
-                    <p class="card-text m-0">Total Plays: 100x</p>
-                    <p class="card-text">12/12/2023</p>
+                    <h5 class="card-title fw-semibold">{{song.judul}}</h5>
+                    <p class="card-text m-0 fw-semibold">{{song.artist}}</p>
+                    <p class="card-text m-0">Total Plays: {{song.total_play}}x</p>
+                    <p class="card-text">{{song.tanggal_rilis}}</p>
                 </div>
             </div>
             <div class="mr-3">
                 <button type="button" class="btn m-0" style="border-radius: 10px; width: 100%;">Lihat</button>
             </div>
         </div>
-        <div class="card-body d-flex justify-content-between gap-5 bg-white p-3 rounded align-items-center">
-            <div class="d-flex gap-3">
-                <div class="d-flex align-items-center ">
-                    <h1 class="fw-bolder">2</h1>
-                </div>
-                <div class="w-100">
-                    <h5 class="card-title fw-semibold">The Hidden World of Subterranean Cities</h5>
-                    <p class="card-text m-0 fw-semibold">NIKI</p>
-                    <p class="card-text m-0">Total Plays: 100x</p>
-                    <p class="card-text">12/12/2023</p>
-                </div>
-            </div>
-            <div class="mr-3">
-                <button type="button" class="btn m-0" style="border-radius: 10px; width: 100%;">Lihat</button>
-            </div>
-        </div>
-        <div class="card-body d-flex justify-content-between gap-5 bg-white p-3 rounded align-items-center">
-            <div class="d-flex gap-3">
-                <div class="d-flex align-items-center ">
-                    <h1 class="fw-bolder">3</h1>
-                </div>
-                <div class="w-100">
-                    <h5 class="card-title fw-semibold">The Hidden World of Subterranean Cities</h5>
-                    <p class="card-text m-0 fw-semibold">NIKI</p>
-                    <p class="card-text m-0">Total Plays: 100x</p>
-                    <p class="card-text">12/12/2023</p>
-                </div>
-            </div>
-            <div class="mr-3">
-                <button type="button" class="btn m-0" style="border-radius: 10px; width: 100%;">Lihat</button>
-            </div>
-        </div>
-        <div class="card-body d-flex justify-content-between gap-5 bg-white p-3 rounded align-items-center">
-            <div class="d-flex gap-3">
-                <div class="d-flex align-items-center ">
-                    <h1 class="fw-bolder">4</h1>
-                </div>
-                <div class="w-100">
-                    <h5 class="card-title fw-semibold">The Hidden World of Subterranean Cities</h5>
-                    <p class="card-text m-0 fw-semibold">NIKI</p>
-                    <p class="card-text m-0">Total Plays: 100x</p>
-                    <p class="card-text">12/12/2023</p>
-                </div>
-            </div>
-            <div class="mr-3">
-                <button type="button" class="btn m-0" style="border-radius: 10px; width: 100%;">Lihat</button>
-            </div>
-        </div>
-        <div class="card-body d-flex justify-content-between gap-5 bg-white p-3 rounded align-items-center">
-            <div class="d-flex gap-3">
-                <div class="d-flex align-items-center ">
-                    <h1 class="fw-bolder">5</h1>
-                </div>
-                <div class="w-100">
-                    <h5 class="card-title fw-semibold">The Hidden World of Subterranean Cities</h5>
-                    <p class="card-text m-0 fw-semibold">NIKI</p>
-                    <p class="card-text m-0">Total Plays: 100x</p>
-                    <p class="card-text">12/12/2023</p>
-                </div>
-            </div>
-            <div class="mr-3">
-                <button type="button" class="btn m-0" style="border-radius: 10px; width: 100%;">Lihat</button>
-            </div>
-        </div>
+        {% endfor %}
         <div>
             <a href="{% url 'chart:list_chart' %}" class="w-100 d-flex justify-content-center">
                 <button type="button" class="btn btn-primary m-0" style="border-radius: 10px; width: 10%;">Kembali</button>
