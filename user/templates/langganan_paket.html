@@ -13,43 +13,17 @@
             </div>
         </div>
         <div class="row">
+            {% for jenis, harga in results %}
             <div class="col-md-3">
                 <div class="card mb-2">
                     <div class="card-body">
-                        <h5 class="card-title">Paket 1 Bulan</h5>
-                        <p class="card-text">Rp 54.900</p>
+                        <h5 class="card-title">Paket {{ jenis }}</h5>
+                        <p class="card-text">Rp {{ harga }}</p>
                         <a href="{% url 'user:pembayaran_paket' %}" class="btn btn-primary">Langganan Sekarang</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Paket 3 Bulan</h5>
-                        <p class="card-text">Rp 164.700</p>
-                        <a href="{% url 'user:pembayaran_paket' %}" class="btn btn-primary">Langganan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Paket 6 Bulan</h5>
-                        <p class="card-text">Rp 329.400</p>
-                        <a href="{% url 'user:pembayaran_paket' %}" class="btn btn-primary">Langganan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Paket 1 Tahun</h5>
-                        <p class="card-text">Rp 658.800</p>
-                        <a href="{% url 'user:pembayaran_paket' %}" class="btn btn-primary">Langganan Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock content %}
