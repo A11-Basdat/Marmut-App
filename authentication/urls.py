@@ -1,10 +1,11 @@
 from django.urls import path
-from authentication.views import register, login, pilih_register
+from authentication.views import register_pengguna, register_label, login, pilih_register
 
 app_name = 'authentication'
 
 urlpatterns = [
     path('pilih_register/', pilih_register, name='pilih_register'),
     path('login/', login, name='login'),
-    path('register/<str:user_type>/', register, name='register'),
+    path('register_pengguna/', register_pengguna, name='register_pengguna'),
+    path('register_label/', register_label, name='register_label'),
 ]

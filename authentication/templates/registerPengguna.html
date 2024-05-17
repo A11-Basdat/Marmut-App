@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filter %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row main-content bg-success text-center">
+        <div class="register_form">
+            <div class="container-fluid">
+                <div class="row">
+                    <h2>Register</h2>
+                </div>
+                <div class="row">
+                    <form method="POST" class="form-group" style="color: #000000;">
+                        {% csrf_token %}
+                        <div class="row">
+                            <label>Email</label>
+                            <div>{{ pengguna_form.email | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Password</label>
+                            <div>{{ pengguna_form.password | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Nama</label>
+                            <div>{{ pengguna_form.nama | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Gender</label>
+                            <div>{{ pengguna_form.gender }}</div>
+                        </div>
+                        <div class="row">
+                            <label>Tempat Lahir</label>
+                            <div>{{ pengguna_form.tempat_lahir | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Tanggal Lahir</label>
+                            <div>{{ pengguna_form.tanggal_lahir | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Kota Asal</label>
+                            <div>{{ pengguna_form.kota_asal | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Role</label>
+                            <div>{{ pengguna_form.role }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="row btn-container">
+                                <button type="submit" name="pengguna_submit" class="btn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div id="popup1" class="overlay">
+    <div class="popup">
+        <h2>Registrasi Gagal</h2>
+        <a class="close" href="{% url 'authentication:login' %}">&times;</a>
+        <div class="content">
+            Email sudah ada! Silahkan coba lagi.
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock content %}

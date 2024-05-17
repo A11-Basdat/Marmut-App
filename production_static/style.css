@@ -90,7 +90,6 @@ form{
 	background-color: #996f59;
 	color:#fff;
 }
-
 .login-card-img{
     border-radius: 50%;
     margin-left: auto;
@@ -99,3 +98,28 @@ form{
     height: auto;
 }
 
+.btn-red {
+    border: 1px solid #cc0000; /* Darker red border */
+	color:#cc0000;
+}
+
+.btn-red:hover {
+    background-color: #ff0000;  /* Red background */
+    color: #ffffff;            /* White text */
+    border: 1px solid #cc0000; /* Darker red border */
+}
+
+.btn-blue {
+    border: 1px solid #0004ff; /* Darker red border */
+	color:#0004ff;
+}
+
+.btn-blue:hover {
+    background-color: #0004ff;  /* Red background */
+    color: #ffffff;            /* White text */
+    border: 1px solid #0004ff; /* Darker red border */
+}
+
+.fc-primary {
+    color: #7c5844;
+}
