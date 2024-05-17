@@ -5,6 +5,6 @@ from playlist.views import addplaylist
 app_name = 'playlist'
 
 urlpatterns = [
-    path('userplaylist/', userplaylist, name='userplaylist'),
-    path('addplaylist/', addplaylist, name='addplaylist')
+    path('', userplaylist, name='userplaylist'),
+    path('addplaylist', addplaylist, name='addplaylist'),
 ]

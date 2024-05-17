@@ -18,9 +18,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>tes</td>
-                            <td>0</td>
-                            <td>0 Menit</td>
+                            <td>{{playlist.title}}</td>
+                            <td>{{playlist.total}}</td>
+                            <td>{{playlist.duration}}</td>
+                            <td>{{playlist.action}}</td>
                             <td><a style="width: 25%;" href="" class="btn btn-secondary">Detail</a><a style="width: 25%;" href="" class="btn btn-secondary">Ubah</a><a style="width: 25%;" href="" class="btn btn-secondary">Hapus</a></td>
                         </tr>
                     </tbody>
@@ -29,7 +30,7 @@
         </div>
 
         <div  class="row justify-content-center">
-            <a style="width: 25%;" href="" class="btn btn-secondary">Tambah Playlist</a>
+            <a style="width: 25%;" href="{% url 'playlist:addplaylist' %}" class="btn btn-secondary">Tambah Playlist</a>
         </div>
     </div>
 
