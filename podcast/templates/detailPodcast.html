@@ -30,6 +30,7 @@
             <div>
                 <h3 class="fw-bold">Daftar Episode</h3>
             </div>
+            {% if podcast.episodes %}
             <div>
                 {% for eps in episodes %}
                 <div class="card mb-3 fc-primary">
@@ -51,7 +52,10 @@
                     </div>
                 </div>
                 {% endfor %}
-            </div>        
+            </div>   
+            {% else %}
+                <p>No Episode Found</p>
+            {% endif %}     
         </div>
     </div>
 

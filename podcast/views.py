@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.db import connection, DatabaseError
+from django.urls import reverse
 from .query import get_podcast_query
 from .format import format_podcast_data
 import uuid
@@ -19,61 +20,124 @@ def create_podcast(request):
         formatted_date = current_datetime.strftime('%Y-%m-%d')
         current_year = current_datetime.year
 
-        try: 
-            cursor.execute(f"""
-                INSERT INTO KONTEN 
-                VALUES ('{new_uuid}', '{judul}', '{formatted_date}', '{current_year}', '{durasi}');
-            """)
+        cursor.execute(f"""
+            INSERT INTO KONTEN 
+            VALUES ('{new_uuid}', '{judul}', '{formatted_date}', '{current_year}', '{durasi}');
+        """)
 
-            cursor.execute(f"""
-                INSERT INTO GENRE VALUES 
-                ('{new_uuid}', '{genre}');
-            """)
+        cursor.execute(f"""
+            INSERT INTO GENRE VALUES 
+            ('{new_uuid}', '{genre}');
+        """)
 
-            cursor.execute(f"""
-                INSERT INTO PODCAST VALUES 
-                ('{new_uuid}', 'laisha07@example.net');
-            """)
+        cursor.execute(f"""
+            INSERT INTO PODCAST  VALUES 
+            ('{new_uuid}', 'laisha07@example.net');
+        """)
 
-            cursor.execute(f"""
-                SELECT KONTEN.judul, GENRE.genre, KONTEN.durasi 
-                FROM KONTEN, GENRE 
-                WHERE KONTEN.id='{new_uuid}' AND GENRE.id_konten=KONTEN.id;
-            """)
-            create_result = cursor.fetchone()
+        cursor.execute(f"""
+            SELECT KONTEN.judul, GENRE.genre, KONTEN.durasi 
+            FROM KONTEN, GENRE 
+            WHERE KONTEN.id='{new_uuid}' AND GENRE.id_konten=KONTEN.id;
+        """)
+        create_result = cursor.fetchone()
 
-            
-            context = {
-                'judul': create_result[0],
-                'genre': create_result[1],
-                'durasi': create_result[2],
-                'error': None
-            }
-
-        except DatabaseError as e:
-            # Handle database errors
-            context = {
-                'judul': None,
-                'genre': None,
-                'durasi': None,
-                'error': str(e)
-            }
+        
+        context = {
+            'judul': create_result[0],
+            'genre': create_result[1],
+            'durasi': create_result[2],
+            'error': None
+        }
 
         return render(request, "createPodcast.html", context)
-        
-        
-
 
     return render(request, "createPodcast.html")
 
 def list_podcast(request):
-    return render(request, "listPodcast.html")
+    cursor = connection.cursor()
+    email = 'laisha07@example.net'
+    cursor.execute(f"""
+                SELECT k.judul, k.durasi, k.id, COUNT(e.id_konten_podcast) AS episode_count
+                FROM podcast AS p
+                JOIN konten AS k ON p.id_konten = k.id
+                LEFT JOIN episode AS e ON e.id_konten_podcast = p.id_konten
+                WHERE p.email_podcaster = '{email}'
+                GROUP BY k.judul, k.durasi, k.id;
+            """)
+    
+    results = cursor.fetchall()
+    podcasts = [
+        {
+            'id': result[2],
+            'judul': result[0],
+            'durasi': result[1],
+            'jumlah_episode': result[3],
+        }
+        for result in results
+    ]
 
-def create_episode(request):
-    return render(request, "createEpisode.html")
+    context = {
+        'podcasts': podcasts,
+    }
 
-def list_episode(request):
-    return render(request, "listEpisode.html")
+    return render(request, "listPodcast.html", context)
+
+def create_episode(request, podcast_id):
+    cursor = connection.cursor()
+
+    if request.method == 'POST':
+        judul = request.POST.get('judul')
+        deskripsi = request.POST.get('deskripsi')
+        durasi = request.POST.get('durasi')
+
+        new_uuid = str(uuid.uuid4())
+        current_datetime = datetime.now()
+        formatted_date = current_datetime.strftime('%Y-%m-%d')
+
+        cursor.execute(f"""
+            INSERT INTO EPISODE 
+            VALUES ('{new_uuid}','{podcast_id}', '{judul}', '{deskripsi}', '{durasi}', '{formatted_date}');
+        """)
+
+
+    context = {
+        'podcast_id': podcast_id
+    }
+
+    return render(request, "createEpisode.html", context)
+
+def list_episode(request, podcast_id):
+    cursor = connection.cursor()
+    cursor.execute(f"""
+                SELECT e.judul, e.deskripsi, e.durasi, e.tanggal_rilis, e.id_episode, k.judul AS podcast_judul
+                FROM podcast AS p
+                JOIN konten AS k ON k.id = p.id_konten
+                LEFT JOIN episode AS e ON e.id_konten_podcast = p.id_konten
+                WHERE p.id_konten = '{podcast_id}';
+            """)
+    
+    results = cursor.fetchall()
+    print(results)
+
+    podcast_dict = {
+        'judul_podcast': results[0][5] if results else '',
+        'episodes': []
+    }
+
+    if results[0][0]:
+        for episode in results:
+            episode_dict = {
+                'judul': episode[0],
+                'deskripsi': episode[1],
+                'durasi': episode[2],
+                'tanggal_rilis': episode[3],  
+                'id_episode': str(episode[4]) 
+            }
+            podcast_dict['episodes'].append(episode_dict)
+
+
+    return render(request, "listEpisode.html", podcast_dict)
 
 def play_podcast(request, podcast_id):
     cursor = connection.cursor()
@@ -83,3 +147,21 @@ def play_podcast(request, podcast_id):
     podcast = format_podcast_data(results)
 
     return render(request, "detailPodcast.html", podcast)
+
+def delete_episode(request, episode_id):
+    cursor = connection.cursor()
+
+    cursor.execute(f"""
+                SELECT id_konten_podcast
+                FROM EPISODE
+                WHERE id_episode = '{episode_id}';
+            """)
+    results = cursor.fetchall()
+
+    cursor.execute(f"""
+                DELETE
+                FROM EPISODE
+                WHERE id_episode = '{episode_id}';
+            """)
+    
+    return redirect(reverse('podcast:list_episode', args=[str(results[0][0])]))
