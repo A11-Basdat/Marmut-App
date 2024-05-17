@@ -1,5 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-# Create your views here.
+def create_song(request):
+    return render(request, 'createSong.html')
+
+def song(request):
+    return render(request, 'song.html')
+
 def downloaded_song(request):
     return render(request, "downloaded_song.html")
