@@ -84,41 +84,38 @@ def insert_podcaster_query(email):
             );
     """
 
-def insert_artist_query(id, email, id_pemilik_hak_cipta):
+def insert_artist_query(id, email):
     return f"""
         INSERT INTO
-        ARTIST (id, email_akun, id_pemilik_hak_cipta)
+        ARTIST (id, email_akun)
         VALUES
             (
                 '{id}',
-                '{email}',
-                '{id_pemilik_hak_cipta}'
+                '{email}'
             );
     """
 
-def insert_songwriter_query(id, email, id_pemilik_hak_cipta):
+def insert_songwriter_query(id, email):
     return f"""
         INSERT INTO
-        SONGWRITER (id, email_akun, id_pemilik_hak_cipta)
+        SONGWRITER (id, email_akun)
         VALUES
             (
                 '{id}',
-                '{email}',
-                '{id_pemilik_hak_cipta}'
+                '{email}'
             );
     """
 
-def insert_label_query(id, nama, email, password, kontak, id_pemilik_hak_cipta):
+def insert_label_query(id, nama, email, password, kontak):
     return f"""
         INSERT INTO
-        SONGWRITER (id, email)
+        LABEL (id, nama, email, password, kontak)
         VALUES
             (
                 '{id}',
                 '{nama}',
                 '{email}',
                 '{password}',
-                '{kontak}',
-                '{id_pemilik_hak_cipta}'
+                '{kontak}'
             );
     """

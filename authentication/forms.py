@@ -13,6 +13,7 @@ class registerPenggunaForm(forms.Form):
         ('podcaster', 'Podcaster'),
         ('artist', 'Artist'),
         ('songwriter', 'Songwriter'),
+        ('penggunabiasa', 'Tidak Ketiganya'),
     ]
     GENDER_CHOICES = [
         (1, 'Laki-laki'),

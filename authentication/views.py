@@ -66,7 +66,7 @@ def register_pengguna(request):
                 else:
                     payload = penggunabiasa_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
                 if payload['success']:
-                    return redirect('/dashboard/')
+                    return redirect('/authentication/login/')
                 else:
                     trimmed_string = re.sub(r'\(|\)|\'', '', payload['msg'])
                     message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
@@ -89,7 +89,7 @@ def register_label(request):
                 kontak = label_form.cleaned_data['kontak']
                 payload = label_register(email, password, nama, kontak)
                 if payload['success']:
-                    return redirect('/dashboard/')
+                    return redirect('/authentication/login/')
                 else:
                     trimmed_string = re.sub(r'\(|\)|\'', '', payload['msg'])
                     message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
@@ -134,11 +134,10 @@ def podcaster_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_
 def artist_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role):
     try:
         id = uuid.uuid4()
-        id_pemilik_hak_cipta = uuid.uuid4()
         cursor = connection.cursor()
         akun_query = insert_akun_query(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
         cursor.execute(akun_query)
-        artist_query = insert_artist_query(id, email, id_pemilik_hak_cipta)
+        artist_query = insert_artist_query(id, email)
         cursor.execute(artist_query)
     except InternalError as e:
         return {
@@ -153,11 +152,10 @@ def artist_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asa
 def songwriter_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role):
     try:
         id = uuid.uuid4()
-        id_pemilik_hak_cipta = uuid.uuid4()
         cursor = connection.cursor()
         akun_query = insert_akun_query(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
         cursor.execute(akun_query)
-        songwriter_query = insert_songwriter_query(id, email, id_pemilik_hak_cipta)
+        songwriter_query = insert_songwriter_query(id, email)
         cursor.execute(songwriter_query)
     except InternalError as e:
         return {
@@ -172,9 +170,8 @@ def songwriter_register(email, password, nama, tempat_lahir, tanggal_lahir, kota
 def label_register(email, password, nama, kontak):
     try:
         id = uuid.uuid4()
-        id_pemilik_hak_cipta = uuid.uuid4()
         cursor = connection.cursor()
-        label_query = insert_label_query(id, nama, email, password, kontak, id_pemilik_hak_cipta)
+        label_query = insert_label_query(id, nama, email, password, kontak)
         cursor.execute(label_query)
     except InternalError as e:
         return {
