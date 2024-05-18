@@ -57,20 +57,27 @@ def register_pengguna(request):
                 kota_asal = pengguna_form.cleaned_data['kota_asal']
                 gender = pengguna_form.cleaned_data['gender']
                 role = pengguna_form.cleaned_data['role']
-                if role == 'podcaster':
-                    payload = podcaster_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
-                elif role == 'artist':
-                    payload = artist_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
-                elif role == 'songwriter':
-                    payload = songwriter_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
+                query = check_user_query(email)
+                cursor = connection.cursor()
+                cursor.execute(query)
+                res = parse(cursor)
+                if len(res) != 0:
+                    messages.info(request,'Email sudah ada!')
                 else:
-                    payload = penggunabiasa_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
-                if payload['success']:
-                    return redirect('/authentication/login/')
-                else:
-                    trimmed_string = re.sub(r'\(|\)|\'', '', payload['msg'])
-                    message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
-                    messages.info(request, message)
+                    if role == 'podcaster':
+                        payload = podcaster_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
+                    elif role == 'artist':
+                        payload = artist_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
+                    elif role == 'songwriter':
+                        payload = songwriter_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
+                    else:
+                        payload = penggunabiasa_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
+                    if payload['success']:
+                        return redirect('/authentication/login/')
+                    else:
+                        trimmed_string = re.sub(r'\(|\)|\'', '', payload['msg'])
+                        message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
+                        messages.info(request, message)
     context = {
         'pengguna_form': registerPenggunaForm(),
     }
@@ -87,13 +94,20 @@ def register_label(request):
                 password = label_form.cleaned_data['password']
                 nama = label_form.cleaned_data['nama']
                 kontak = label_form.cleaned_data['kontak']
-                payload = label_register(email, password, nama, kontak)
-                if payload['success']:
-                    return redirect('/authentication/login/')
+                query = check_user_query(email)
+                cursor = connection.cursor()
+                cursor.execute(query)
+                res = parse(cursor)
+                if len(res) != 0:
+                    messages.info(request,'Email sudah ada!')
                 else:
-                    trimmed_string = re.sub(r'\(|\)|\'', '', payload['msg'])
-                    message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
-                    messages.info(request, message)
+                    payload = label_register(email, password, nama, kontak)
+                    if payload['success']:
+                        return redirect('/authentication/login/')
+                    else:
+                        trimmed_string = re.sub(r'\(|\)|\'', '', payload['msg'])
+                        message = re.search(r'\[([^]]+)\]', trimmed_string).group(1)
+                        messages.info(request, message)
     context = {
         'label_form': registerLabelForm(),
     }

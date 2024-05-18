@@ -115,13 +115,14 @@
                     {% endif %}
                     <ul id="list" style="color:#996f59; text-align: left;">
                     </ul>
+                    <label id="kosong"></label>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script>
-    const listUl = document.getElementById('list');
+    let listString = "";
     if ( "{{ albums }}" !== "") {
         listString = "{{ albums }}";
     } else if ( "{{ playlists }}" !== "") {
@@ -133,12 +134,32 @@
     } else if ( "{{ songs_songwriter }}" !== "") {
         listString = "{{ songs_songwriter }}";
     }
-    const listArray = listString.split(", ");
-    listArray.forEach(song => {
-        const li = document.createElement('li');
-        li.textContent = song.trim();
-        listUl.appendChild(li);
-    });
+    if (listString === "None") {
+        if ( "{{ albums }}" == "None") {
+            const kosongUl = document.getElementById('kosong');
+            kosongUl.append("Belum Memproduksi Album");
+        } else if ( "{{ playlists }}" === "None") {
+            const kosongUl = document.getElementById('kosong');
+            kosongUl.append("Belum Memiliki Playlist");
+        } else if ( "{{ podcasts }}" === "None") {
+            const kosongUl = document.getElementById('kosong');
+            kosongUl.append("Belum Memproduksi Podcast");
+        } else if ( "{{ songs_artist }}" === "None") {
+            const kosongUl = document.getElementById('kosong');
+            kosongUl.append("Belum Memproduksi Lagu");
+        } else if ( "{{ songs_songwriter }}" === "None") {
+            const kosongUl = document.getElementById('kosong');
+            kosongUl.append("Belum Memproduksi Lagu");
+        }
+    } else {
+        const listUl = document.getElementById('list');
+        const listArray = listString.split(", ");
+        listArray.forEach(song => {
+            const li = document.createElement('li');
+            li.textContent = song.trim();
+            listUl.appendChild(li);
+        });
+    }
 </script>
 {% endblock content %}
 

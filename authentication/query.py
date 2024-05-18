@@ -119,3 +119,30 @@ def insert_label_query(id, nama, email, password, kontak):
                 '{kontak}'
             );
     """
+
+def check_user_query(email):
+    return f"""
+        WITH user_info AS (
+            SELECT
+                email,
+                'akun' AS user_type
+            FROM
+                AKUN
+            WHERE
+                email = '{email}'
+            UNION ALL
+            SELECT
+                email,
+                'label' AS user_type
+            FROM
+                LABEL
+            WHERE
+                email = '{email}'
+        )
+        SELECT
+            ui.email
+        FROM
+            user_info ui
+        WHERE
+            ui.email = '{email}';
+"""
