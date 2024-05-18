@@ -198,7 +198,7 @@ def label_register(email, password, nama, kontak):
         }
 
 def logout(request):
-    if "id" in request.session:
+    if "email" in request.session:
         request.session.clear()
         request.session['is_penggunabiasa'] = False
         request.session['is_podcaster'] = False
