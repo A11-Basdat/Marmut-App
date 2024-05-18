@@ -10,28 +10,135 @@
                     <h2>Dashboard</h2>
                 </div>
                 <div class="row">
+                    {% if request.session.is_label %}
                     <table class="min-w-full text-sm font-dark overflow-hidden" style="color:#996f59">
-                        <tbody>
-                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                            <td class="whitespace-nowrap px-6 py-4">Nama: Citlalli Smitham Sr.</td>
-                            <td class="whitespace-nowrap px-6 py-4">Email: jennie94@example.org</td>
-                        </tr>
-                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                            <td class="whitespace-nowrap px-6 py-4">Kontak: </td>
-                            <td class="whitespace-nowrap px-6 py-4">Gender: </td>
-                        </tr>
-                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                            <td class="whitespace-nowrap px-6 py-4">Tempat lahir: </td>
-                            <td class="whitespace-nowrap px-6 py-4">Tanggal lahir: </td>
-                        </tr>
-                        <tr class="border-b transition duration-300 ease-in-out hover:bg-shark-700 border-shark-400">
-                            <td class="whitespace-nowrap px-6 py-4">Role: </td>
-                        </tr>
+                    <tbody>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Nama: {{ nama }}</td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Email: {{ email }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Kontak: {{ kontak }} </td>
+                    </tr>
                     </table>
+                    <h3 style="color:#996f59;"> Albums: </h3>
+                    {% endif %}
+                    {% if request.session.is_penggunabiasa %}
+                    <table class="min-w-full text-sm font-dark overflow-hidden" style="color:#996f59">
+                    <tbody>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Nama: {{ nama }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Email: {{ email }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Gender: {{ user_gender }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Role: {{ request.session.user_role }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Status Langganan: {{ jenis_paket }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Kota Asal: {{ kota_asal }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Tempat Lahir: {{ tempat_lahir }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Tanggal Lahir: {{ tanggal_lahir }} </td>
+                    </tr>
+                    </table>
+                    <h3 style="color:#996f59;"> Playlists: </h3>
+                    {% endif %}
+                    {% if request.session.is_podcaster %}
+                    <table class="min-w-full text-sm font-dark overflow-hidden" style="color:#996f59">
+                    <tbody>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Nama: {{ nama }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Email: {{ email }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Gender: {{ user_gender }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Role: {{ request.session.user_role }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Status Langganan: {{ jenis_paket }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Kota Asal: {{ kota_asal }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Tempat Lahir: {{ tempat_lahir }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Tanggal Lahir: {{ tanggal_lahir }} </td>
+                    </tr>
+                    </table>
+                    <h3 style="color:#996f59;"> Podcasts: </h3>
+                    {% endif %}
+                    {% if request.session.is_artist %}
+                    <table class="min-w-full text-sm font-dark overflow-hidden" style="color:#996f59">
+                    <tbody>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Nama: {{ nama }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Email: {{ email }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Gender: {{ user_gender }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Role: {{ request.session.user_role }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Status Langganan: {{ jenis_paket }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Kota Asal: {{ kota_asal }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Tempat Lahir: {{ tempat_lahir }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Tanggal Lahir: {{ tanggal_lahir }} </td>
+                    </tr>
+                    </table>
+                    <h3 style="color:#996f59;"> Songs: </h3>
+                    {% endif %}
+                    {% if request.session.is_songwriter %}
+                    <table class="min-w-full text-sm font-dark overflow-hidden" style="color:#996f59">
+                    <tbody>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Nama: {{ nama }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Email: {{ email }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Gender: {{ user_gender }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Role: {{ request.session.user_role }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Status Langganan: {{ jenis_paket }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Kota Asal: {{ kota_asal }} </td>
+                    </tr>
+                    <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
+                        <td class="whitespace-nowrap px-6 py-4">Tempat Lahir: {{ tempat_lahir }}</td>
+                        <td class="whitespace-nowrap px-6 py-4">Tanggal Lahir: {{ tanggal_lahir }} </td>
+                    </tr>
+                    </table>
+                    <h3 style="color:#996f59;"> Songs: </h3>
+                    {% endif %}
+                    <ul id="list" style="color:#996f59; text-align: left;">
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<script>
+    const listUl = document.getElementById('list');
+    if ( "{{ albums }}" !== "") {
+        listString = "{{ albums }}";
+    } else if ( "{{ playlists }}" !== "") {
+        listString = "{{ playlists }}";
+    } else if ( "{{ podcasts }}" !== "") {
+        listString = "{{ podcasts }}";
+    } else if ( "{{ songs_artist }}" !== "") {
+        listString = "{{ songs_artist }}";
+    } else if ( "{{ songs_songwriter }}" !== "") {
+        listString = "{{ songs_songwriter }}";
+    }
+    const listArray = listString.split(", ");
+    listArray.forEach(song => {
+        const li = document.createElement('li');
+        li.textContent = song.trim();
+        listUl.appendChild(li);
+    });
+</script>
 {% endblock content %}
+

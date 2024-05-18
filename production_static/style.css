@@ -33,7 +33,8 @@
 	color:#996f59;
 }
 label, span, input {
-    text-align: left; /* Align labels to the left */
+    color:#996f59;
+    text-align: left;
     display: inline-block;
     justify-content: left;
 }

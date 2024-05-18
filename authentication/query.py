@@ -22,21 +22,13 @@ def get_user_query(email, password):
         )
         SELECT
             ui.email,
-            t.jenis_paket,
-            a.kota_asal,
-            CASE
-                WHEN a.gender =1 THEN 'laki-laki'
-                ELSE 'perempuan'
-            END AS User_Gender,
-            a.tempat_lahir,
-            a.tanggal_Lahir,
             CASE
                 WHEN l.email is NOT NULL THEN 'label'
                 WHEN p.email IS NOT NULL THEN 'podcaster'
                 WHEN ar.email_akun IS NOT NULL THEN 'artist'
                 WHEN s.email_akun IS NOT NULL THEN 'songwriter'
-                ELSE 'pengguna biasa'
-            END AS User_Role
+                ELSE 'penggunabiasa'
+            END AS user_role
         FROM
             user_info ui
             LEFT JOIN AKUN a ON ui.email = a.email
@@ -44,7 +36,6 @@ def get_user_query(email, password):
             LEFT JOIN PODCASTER p ON ui.email = p.email
             LEFT JOIN ARTIST ar ON ui.email = ar.email_akun
             LEFT JOIN SONGWRITER s ON ui.email = s.email_akun
-            LEFT JOIN TRANSACTION t ON ui.email = t.email
         WHERE
             ui.email = '{email}' AND ui.password = '{password}';
 """
