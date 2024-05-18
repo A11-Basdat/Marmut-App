@@ -22,21 +22,13 @@ def get_user_query(email, password):
         )
         SELECT
             ui.email,
-            t.jenis_paket,
-            a.kota_asal,
-            CASE
-                WHEN a.gender =1 THEN 'laki-laki'
-                ELSE 'perempuan'
-            END AS User_Gender,
-            a.tempat_lahir,
-            a.tanggal_Lahir,
             CASE
                 WHEN l.email is NOT NULL THEN 'label'
                 WHEN p.email IS NOT NULL THEN 'podcaster'
                 WHEN ar.email_akun IS NOT NULL THEN 'artist'
                 WHEN s.email_akun IS NOT NULL THEN 'songwriter'
-                ELSE 'pengguna biasa'
-            END AS User_Role
+                ELSE 'penggunabiasa'
+            END AS user_role
         FROM
             user_info ui
             LEFT JOIN AKUN a ON ui.email = a.email
@@ -44,7 +36,6 @@ def get_user_query(email, password):
             LEFT JOIN PODCASTER p ON ui.email = p.email
             LEFT JOIN ARTIST ar ON ui.email = ar.email_akun
             LEFT JOIN SONGWRITER s ON ui.email = s.email_akun
-            LEFT JOIN TRANSACTION t ON ui.email = t.email
         WHERE
             ui.email = '{email}' AND ui.password = '{password}';
 """
@@ -93,41 +84,65 @@ def insert_podcaster_query(email):
             );
     """
 
-def insert_artist_query(id, email, id_pemilik_hak_cipta):
+def insert_artist_query(id, email):
     return f"""
         INSERT INTO
-        ARTIST (id, email_akun, id_pemilik_hak_cipta)
+        ARTIST (id, email_akun)
         VALUES
             (
                 '{id}',
-                '{email}',
-                '{id_pemilik_hak_cipta}'
+                '{email}'
             );
     """
 
-def insert_songwriter_query(id, email, id_pemilik_hak_cipta):
+def insert_songwriter_query(id, email):
     return f"""
         INSERT INTO
-        SONGWRITER (id, email_akun, id_pemilik_hak_cipta)
+        SONGWRITER (id, email_akun)
         VALUES
             (
                 '{id}',
-                '{email}',
-                '{id_pemilik_hak_cipta}'
+                '{email}'
             );
     """
 
-def insert_label_query(id, nama, email, password, kontak, id_pemilik_hak_cipta):
+def insert_label_query(id, nama, email, password, kontak):
     return f"""
         INSERT INTO
-        SONGWRITER (id, email)
+        LABEL (id, nama, email, password, kontak)
         VALUES
             (
                 '{id}',
                 '{nama}',
                 '{email}',
                 '{password}',
-                '{kontak}',
-                '{id_pemilik_hak_cipta}'
+                '{kontak}'
             );
     """
+
+def check_user_query(email):
+    return f"""
+        WITH user_info AS (
+            SELECT
+                email,
+                'akun' AS user_type
+            FROM
+                AKUN
+            WHERE
+                email = '{email}'
+            UNION ALL
+            SELECT
+                email,
+                'label' AS user_type
+            FROM
+                LABEL
+            WHERE
+                email = '{email}'
+        )
+        SELECT
+            ui.email
+        FROM
+            user_info ui
+        WHERE
+            ui.email = '{email}';
+"""
