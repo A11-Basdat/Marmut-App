@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center">SEARCH BAR</h2>
+        <form action="" method="GET" class="mt-4">
+            <div class="form-group mx-auto text-center">
+                <input style="width: 50%;" type="text" class="form-control mx-auto" id="query" name="query" placeholder="Masukkan judul/nama">
+            </div>
+            <div class="text-center">
+                <a style="width: 25%;" href="" class="btn btn-primary">Cari</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Hasil Pencarian</h2>
+        <div class="mt-4">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Tipe</th>
+                        <th scope="col">Judul</th>
+                        <th scope="col">Oleh</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Podcast</td>
+                        <td>The Michelle Obama Podcast</td>
+                        <td>Vickie Rempel</td>
+                        <td><a>[Lihat]</a></td>
+                    </tr>
+                    <tr>
+                        <td>Song</td>
+                        <td>Dance Monkey</td>
+                        <td>Laisha McGlynn</td>
+                        <td><a>[Lihat]</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}

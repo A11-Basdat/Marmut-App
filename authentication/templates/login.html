@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filter %}
 
 {% block content %}
 <div class="container-fluid">
@@ -8,32 +9,55 @@
       <img src="/static/assets/images/marmut.png" alt="login" class="login-card-img">
       <h4 class="website_title">Marmut</h4>
     </div>
-    <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+    <div class="col-md-8 col-xs-12 col-sm-12 login_form">
       <div class="container-fluid">
         <div class="row">
           <h2>Log In</h2>
         </div>
         <div class="row">
-          <form control="" class="form-group">
+          <form method="post" class="form-group">
+            {% csrf_token %}
             <div class="row">
-              <input type="text" name="username" id="username" class="form__input" placeholder="Username">
+              <label>Email</label>
+              <div> {{ login_form.email | addclass:"form__input"}} </div>
             </div>
             <div class="row">
-              <input type="password" name="password" id="password" class="form__input" placeholder="Password">
+              <label>Password</label>
+              <div> {{ login_form.password | addclass:"form__input"}} </div>
             </div>
             <div class="row">
               <div class="row btn-container">
-              <input type="submit" value="Submit" class="btn">
-            </div>
+                <input type="submit" value="Submit" class="btn">
+              </div>
             </div>
           </form>
+          <div class="row">
+          <p>Don't have an account? <a href="{% url 'authentication:pilih_register' %}">Register Here</a></p>
         </div>
-        <div class="row">
-          <p>Don't have an account? <a href="#">Register Here</a></p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+{% if messages %}
+{% for message in messages %}
+<div style="background-color: #FAA0A0;" class="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto">
+    <div class="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-midnight outline-none focus:outline-none">
+      <div class="px-8 py-12 flex flex-col gap-4">
+        <h1 class="text-2xl text-center font-semibold">
+          Login Gagal
+        </h1>
+        <hr class="border-shark-400 w-full">
+        <div class="text-center text-danger">
+          {{ message }}.
+          <a class="text-primary-400 hover:underline transition" href="{% url 'authentication:login' %}">
+          Coba Lagi?
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% endif %}
 {% endblock content %}

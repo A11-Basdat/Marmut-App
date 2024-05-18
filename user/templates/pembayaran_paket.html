@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <!-- Content -->
+    <div class="container mt-5">
+        <h2 class="text-center">PEMBAYARAN PAKET</h2>
+        <div class="column mx-auto justify-content-center">
+            <div class="column mt-5">
+                <h4 class="text-center">Informasi Paket yang Ingin Dibeli:</h4>
+                <table style="Width:50%" class="table table-bordered table-striped text-center mx-auto">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="col-1">Jenis</th>
+                            <th scope="col" class="col-1">Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ jenis }}</td>
+                            <td>{{ harga }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column mt-5">
+                <h4 class="text-center">Metode Pembayaran:</h4>
+                <div class="form-group">
+                    <select style="width: auto;" class="form-control mx-auto">
+                        <option>Transfer Bank</option>
+                        <option>Kartu Kredit</option>
+                        <option>E-Wallet</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-4"> <!-- Baris baru untuk tombol -->
+                <div class="text-center">
+                    <a style="width: 20%;" href="{% url 'user:langganan_paket' %}" class="btn btn-primary">Kembali</a>
+                    <button style="width: 20%;" class="btn btn-primary">Bayar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

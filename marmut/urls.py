@@ -23,5 +23,10 @@ urlpatterns = [
     path('', include('base.urls')),
     path('authentication/', include('authentication.urls')),
     path('dashboard/', include('dashboard.urls')),
+    path('user/', include('user.urls')),
     path('chart/', include('chart.urls')),
+    path('song/', include('song.urls')),
+    path('album/', include('album.urls')),
+    path('song/', include('song.urls')),
+    path('royalti/', include('royalti.urls'))
 ]
