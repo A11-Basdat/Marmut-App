@@ -21,8 +21,27 @@
                             <td>{{playlist.title}}</td>
                             <td>{{playlist.total}}</td>
                             <td>{{playlist.duration}}</td>
-                            <td>{{playlist.action}}</td>
-                            <td><a style="width: 25%;" href="" class="btn btn-secondary">Detail</a><a style="width: 25%;" href="" class="btn btn-secondary">Ubah</a><a style="width: 25%;" href="" class="btn btn-secondary">Hapus</a></td>
+                            <td>
+                                <a href="{% url 'song:songdetail' %}">
+                                    <button>
+                                        Detail
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'playlist:editplaylist' book.pk %}">
+                                    <button>
+                                        Ubah
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'playlist:deleteplaylist' book.pk %}">
+                                    <button>
+                                        Hapus
+                                    </button>
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

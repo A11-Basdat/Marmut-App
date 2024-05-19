@@ -30,5 +30,16 @@ def addplaylist(request):
     context = {'form': form}
     return render(request, "addplaylist.html", context)
 
+def editplaylist(request, id):
+    playlist = Playlist.objects.get(pk = id)
+    form = PlaylistForm(request.POST or None, instance=playlist)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('playlist:userplaylist'))
+
+    context = {'form': form}
+    return render(request, "editplaylist.html", context)
+
 
 

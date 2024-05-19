@@ -37,10 +37,23 @@
                         <a class="nav-link" href="#">Features</a>
                     </li>
                     <li class="nav-item">
+<<<<<<< HEAD
                         <a  class="nav-link" href="#">Pricing</a>
+=======
+                        <a href="{%url 'user:langganan_paket'%}"class="nav-link" href="#">Pricing</a>
+>>>>>>> b926dd5622e4f0766a8e76aabf10b928d763087f
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
+                        <a href="{%url 'dashboard:search_bar'%}"class="nav-link" href="#">Search for Content</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'album:album' %}">Album</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'song:song' %}">Song</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'royalti:royalti' %}">Royalti</a>
                     </li>
                 </ul>
             </div>
