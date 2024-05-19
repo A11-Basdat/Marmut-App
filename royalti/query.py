@@ -14,9 +14,9 @@ def get_label_royalti_query(email):
             LEFT JOIN ALBUM al ON so.id_album = al.id
             LEFT JOIN KONTEN k ON so.id_konten = k.id
         WHERE
-            l.email_akun = '{email}'
+            l.email = '{email}'
         GROUP BY
-            l.email_akun;
+            l.email;
     """
 
 def get_artist_royalti_query(email):

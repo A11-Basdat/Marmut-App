@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.db import connection
 from base.helper.function import parse
 from dashboard.query import *
-# def dashboard(request):
-#     return render(request, 'dashboard.html')
 
 def dashboard(request):
     context = {}

@@ -4,6 +4,7 @@ def get_user_query(email, password):
         WITH user_info AS (
             SELECT
                 email,
+                nama,
                 password,
                 'akun' AS user_type
             FROM
@@ -13,6 +14,7 @@ def get_user_query(email, password):
             UNION ALL
             SELECT
                 email,
+                nama,
                 password,
                 'label' AS user_type
             FROM
@@ -22,6 +24,7 @@ def get_user_query(email, password):
         )
         SELECT
             ui.email,
+            ui.nama,
             CASE
                 WHEN l.email is NOT NULL THEN 'label'
                 WHEN p.email IS NOT NULL THEN 'podcaster'
@@ -84,25 +87,27 @@ def insert_podcaster_query(email):
             );
     """
 
-def insert_artist_query(id, email):
+def insert_artist_query(id, email, id_phc):
     return f"""
         INSERT INTO
-        ARTIST (id, email_akun)
+        ARTIST (id, email_akun, id_pemilik_hak_cipta)
         VALUES
             (
                 '{id}',
-                '{email}'
+                '{email}',
+                '{id_phc}'
             );
     """
 
-def insert_songwriter_query(id, email):
+def insert_songwriter_query(id, email, id_phc):
     return f"""
         INSERT INTO
-        SONGWRITER (id, email_akun)
+        SONGWRITER (id, email_akun, id_pemilik_hak_cipta)
         VALUES
             (
                 '{id}',
-                '{email}'
+                '{email}',
+                '{id_phc}'
             );
     """
 
@@ -117,6 +122,17 @@ def insert_label_query(id, nama, email, password, kontak):
                 '{email}',
                 '{password}',
                 '{kontak}'
+            );
+    """
+
+def insert_phc_query(id, rate_royalti):
+    return f"""
+        INSERT INTO
+        PEMILIK_HAK_CIPTA (id, rate_royalti)
+        VALUES
+            (
+                '{id}',
+                '{rate_royalti}'
             );
     """
 
