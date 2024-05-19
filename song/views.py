@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from random import random
+import random
 
 from django.shortcuts import render, redirect
 from django.db import connection
@@ -18,14 +18,21 @@ def song(request):
     context = {}
     if request.session['is_artist']:
         cursor = connection.cursor()
-        query = get_artist_song_query(request.session['email'])
+        query = get_artist_song_query(request.session['email'], request.session['album_name'])
         cursor.execute(query)
         res = parse(cursor)[0]
         for attr in res:
             context[attr] = res[attr]
     elif request.session['is_songwriter']:
         cursor = connection.cursor()
-        query = get_songwriter_song_query(request.session['email'])
+        query = get_songwriter_song_query(request.session['email'], request.session['album_name'])
+        cursor.execute(query)
+        res = parse(cursor)[0]
+        for attr in res:
+            context[attr] = res[attr]
+    elif request.session['is_label']:
+        cursor = connection.cursor()
+        query = get_label_song_query(request.session['email'], request.session['album_name'])
         cursor.execute(query)
         res = parse(cursor)[0]
         for attr in res:

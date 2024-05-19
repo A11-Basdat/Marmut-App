@@ -15,7 +15,7 @@
             {% csrf_token %}
             {% if request.session.is_artist %}
             <div class="row">
-              <label>Album: {{ album_name }}</label>
+              <label>Album: {{ request.session.album_name }}</label>
             </div>
             <div class="row">
               <label>Judul Lagu</label>
