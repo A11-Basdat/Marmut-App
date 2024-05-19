@@ -11,7 +11,7 @@ from authentication.query import *
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
-def login(request):
+def login(request):   
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
