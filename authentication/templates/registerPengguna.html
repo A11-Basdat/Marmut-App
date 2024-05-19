@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filter %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row main-content bg-success text-center">
+        <div class="register_form">
+            <div class="container-fluid">
+                <div class="row">
+                    <h2>Register</h2>
+                </div>
+                <div class="row">
+                    <form method="POST" class="form-group" style="color: #000000;">
+                        {% csrf_token %}
+                        <div class="row">
+                            <label>Email</label>
+                            <div>{{ pengguna_form.email | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Password</label>
+                            <div>{{ pengguna_form.password | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Nama</label>
+                            <div>{{ pengguna_form.nama | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Gender</label>
+                            <div>{{ pengguna_form.gender }}</div>
+                        </div>
+                        <div class="row">
+                            <label>Tempat Lahir</label>
+                            <div>{{ pengguna_form.tempat_lahir | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Tanggal Lahir</label>
+                            <div>{{ pengguna_form.tanggal_lahir | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Kota Asal</label>
+                            <div>{{ pengguna_form.kota_asal | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Role</label>
+                            <div>{{ pengguna_form.role }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="row btn-container">
+                                <button type="submit" name="pengguna_submit" class="btn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div style="background-color: #FAA0A0;" class="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto">
+    <div class="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-midnight outline-none focus:outline-none">
+        <div class="px-8 py-12 flex flex-col gap-4">
+            <h1 class="text-2xl text-center font-semibold">
+                Registrasi Gagal
+            </h1>
+            <hr class="border-shark-400 w-full">
+            <div class="text-center text-danger">
+                {{ message }}
+                <a class="text-primary-400 hover:underline transition" href="{% url 'authentication:register_pengguna' %}">
+                    Coba Lagi?
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock content %}
