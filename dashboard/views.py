@@ -42,6 +42,26 @@ def dashboard(request):
         res = parse(cursor)[0]
         for attr in res:
             context[attr] = res[attr]
+
+    cursor = connection.cursor()
+    cursor.execute(f"""
+        SELECT k.judul, k.durasi, k.id
+        FROM KONTEN as k, PODCAST as p
+        WHERE k.id = p.id_konten
+    """)
+
+    res = cursor.fetchall()
+
+    podcast_list = [{
+    'title': title,
+    'duration': duration,
+    'id': str(id)
+    } for title, duration, id in res]
+
+    context['all_podcasts'] = podcast_list
+
+    print(context)
+
     return render(request, 'dashboard.html', context)
 
 def search_bar(request):

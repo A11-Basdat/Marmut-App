@@ -6,33 +6,37 @@
     <div class="p-3 rounded w-50 m-auto bg-white fc-primary">
         <div class="pb-3">
             <h1 class="fw-bold">Buat Episode</h1>
-            <h3 class="fw-bold">Podcast: Stuff You Should Know</h3>
+            <h3 class="fw-bold">Podcast: {{judul}}</h3>
         </div>
-        <div>
-            <div class="mb-2 row">
-                <label class="col-sm-1 col-form-label fw-semibold">Judul</label>
-                <div class="col-sm-11">
-                    <input class="form-control" type="text" aria-label="default input example">
+        
+        <form method="post" action="/podcast/create-episode/{{ podcast_id }}/">
+            {% csrf_token %}
+            <div>
+                <div class="mb-2 row">
+                    <label class="col-sm-1 col-form-label fw-semibold">Judul</label>
+                    <div class="col-sm-11">
+                        <input class="form-control" type="text" name='judul' aria-label="default input example">
+                    </div>
+                </div>
+                <div class="mb-2 row">
+                    <label class="col-sm-1 col-form-label fw-semibold">Deskripsi</label>
+                    <div class="col-sm-11">
+                        <textarea class="form-control" rows="2" aria-label="textarea" name='deskripsi'></textarea>
+                    </div>
+                </div>
+                <div class="mb-2 row">
+                    <label class="col-sm-1 col-form-label fw-semibold">Durasi</label>
+                    <div class="col-sm-11">
+                        <input class="form-control" type="text" aria-label="default input example" name='durasi'>
+                    </div>
+                </div>
+                <div class="mb-2 row">
+                    <div class="col-sm-12 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Buat Episode</button>
+                    </div>
                 </div>
             </div>
-            <div class="mb-2 row">
-                <label class="col-sm-1 col-form-label fw-semibold">Deskripsi</label>
-                <div class="col-sm-11">
-                    <textarea class="form-control" rows="2" aria-label="textarea"></textarea>
-                </div>
-            </div>
-            <div class="mb-2 row">
-                <label class="col-sm-1 col-form-label fw-semibold">Durasi</label>
-                <div class="col-sm-11">
-                    <input class="form-control" type="text" aria-label="default input example">
-                </div>
-            </div>
-            <div class="mb-2 row">
-                <div class="col-sm-12 d-flex justify-content-center">
-                    <button type="button" class="btn btn-primary">Buat Episode</button>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 
 </div>

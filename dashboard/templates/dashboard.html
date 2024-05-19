@@ -117,6 +117,24 @@
                     </ul>
                     <label id="kosong"></label>
                 </div>
+                <div class="row w-100">
+                    <h3  style="color:#996f59;">All Podcasts:</h3>
+                    {% for podcast in all_podcasts %}
+                    <div class="card mb-3" style="max-width: 540px; margin: auto; background-color: #f8f9fa;">
+                        <div class="row g-0">
+                            <div class="col-md-12">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color:#996f59;">{{ podcast.title }}</h5>
+                                    <p class="card-text" style="color:#996f59;">Duration: {{ podcast.duration }} Minutes</p>
+                                    <a href="/podcast/play/{{podcast.id}}/">
+                                        <button class="btn m-0">Play Podcast</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

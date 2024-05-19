@@ -14,14 +14,15 @@ def format_podcast_data(results):
         'tahun': tahun,
         'episodes': []
     }
-    
-    for _, _, _, _, _, _, episode_judul, deskripsi, episode_durasi, episode_tanggal_rilis in results:
-        episode = {
-            'episode_judul': episode_judul,
-            'deskripsi': deskripsi,
-            'episode_durasi': episode_durasi,
-            'episode_tanggal_rilis': episode_tanggal_rilis
-        }
-        podcast['episodes'].append(episode)
+
+    if (results[0][6] != None):
+        for _, _, _, _, _, _, episode_judul, deskripsi, episode_durasi, episode_tanggal_rilis in results:
+            episode = {
+                'episode_judul': episode_judul,
+                'deskripsi': deskripsi,
+                'episode_durasi': episode_durasi,
+                'episode_tanggal_rilis': episode_tanggal_rilis
+            }
+            podcast['episodes'].append(episode)
     
     return podcast
