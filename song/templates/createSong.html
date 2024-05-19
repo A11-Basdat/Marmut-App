@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filter %}
 
 {% block content %}
 <div class="container-fluid">
@@ -7,67 +8,68 @@
     <div class="register_form" >
       <div class="container-fluid">
         <div class="row">
-          <h2>Create Lagu</h2>
+          <h2>Create Song</h2>
         </div>
         <div class="row">
-          <form control="" class="form-group"  style="color: #000000;">
+          <form method="POST" class="form-group"  style="color: #000000;">
+            {% csrf_token %}
+            {% if request.session.is_artist %}
             <div class="row">
-              <span class="album">Album: Album1</span>
+              <label>Album: {{ album_name }}</label>
             </div>
-            <br>
             <div class="row">
-              <label for="judul">Judul:</label>
-              <input type="text" name="judul" id="judul" class="form__input">
+              <label>Judul Lagu</label>
+              <div>{{ form.judul_lagu | addclass:"form__input"}}</div>
             </div>
-            {% if user_type == 'artist' %}
             <div class="row">
-              <span class="artist">Artist: Artist1</span>
+              <label>Artist: {{ request.session.nama }}</label>
             </div>
-            <br>
-            <div style="text-align:left;">
-              <span class="songwriter">Songwriter: </span> <br>
-              <input type="checkbox" id="songwriter1" name="songwriter1" value="Songwriter1">
-              <label for="songwriter1"> Songwriter1</label>  <br>
-              <input type="checkbox" id="songwriter2" name="songwriter2" value="Songwriter2">
-              <label for="songwriter2"> Songwriter2</label>  <br>
-              <input type="checkbox" id="songwriter3" name="songwriter3" value="Songwriter3">
-              <label for="songwriter3"> Songwriter3</label>  <br>
-            </div>
-            {% else %}
-            <div style="text-align:left;">
-              <span class="artist">Artist: </span> <br>
-              <input type="checkbox" id="artist1" name="artist1" value="Artist1">
-              <label for="artist1"> Artist1</label>  <br>
-              <input type="checkbox" id="artist2" name="artist2" value="Artist2">
-              <label for="artist2"> Artist2</label>  <br>
-              <input type="checkbox" id="artist3" name="artist3" value="Artist3">
-              <label for="artist3"> Artist3</label>  <br>
-            </div>
-            <br>
             <div class="row">
-              <span class="songwriter">Songwriter: Songwriter1</span>
+              <label>Songwriter</label>
+              <div>{{ form.daftar_songwriter | addclass:"form__input"}}</div>
             </div>
-            {% endif %}
-            <br>
-            <div style="text-align:left;">
-              <span class="genre">Genre: </span> <br>
-              <input type="checkbox" id="genre1" name="genre1" value="Genre1">
-              <label for="genre1"> Genre1</label>  <br>
-              <input type="checkbox" id="genre2" name="genre2" value="Genre2">
-              <label for="genre2"> Genre2</label>  <br>
-              <input type="checkbox" id="genre3" name="genre3" value="Genre3">
-              <label for="genre3"> Genre3</label>  <br>
-            </div>
-            <br>
             <div class="row">
-              <label for="durasi">Durasi:</label>
-              <input type="text" name="durasi" id="durasi" class="form__input">
+              <label>Genre</label>
+              <div>{{ form.daftar_genre | addclass:"form__input"}}</div>
+            </div>
+            <div class="row">
+              <label>Durasi</label>
+              <div>{{ form.durasi | addclass:"form__input"}}</div>
             </div>
             <div class="row">
               <div class="row btn-container">
-                <input type="submit" value="Submit" class="btn">
+                <button type="submit" name="form_submit" class="btn">Submit</button>
               </div>
             </div>
+            {% elif request.session.is_songwriter %}
+            <div class="row">
+              <label>Album: {{ album_name }} </label>
+            </div>
+            <div class="row">
+              <label>Judul Lagu</label>
+              <div>{{ form.judul_lagu | addclass:"form__input"}}</div>
+            </div>
+            <div class="row">
+              <label>Artist</label>
+              <div>{{ form.daftar_artist | addclass:"form__input"}}</div>
+            </div>
+            <div class="row">
+              <label>Songwriter: {{ request.session.nama }}</label>
+            </div>
+            <div class="row">
+              <label>Genre</label>
+              <div>{{ form.daftar_genre | addclass:"form__input"}}</div>
+            </div>
+            <div class="row">
+              <label>Durasi</label>
+              <div>{{ form.durasi | addclass:"form__input"}}</div>
+            </div>
+            <div class="row">
+              <div class="row btn-container">
+                <button type="submit" name="form_submit" class="btn">Submit</button>
+              </div>
+            </div>
+            {% endif %}
           </form>
         </div>
       </div>

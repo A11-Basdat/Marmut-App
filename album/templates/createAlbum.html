@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filter %}
 
 {% block content %}
 <div class="container-fluid">
@@ -10,24 +11,81 @@
                     <h2>Create Album</h2>
                 </div>
                 <div class="row">
-                    <form control="" class="form-group"  style="color: #000000;">
+                    <form method="POST" class="form-group"  style="color: #000000;">
+                        {% csrf_token %}
+                        {% if request.session.is_artist %}
                         <div class="row">
-                            <label for="judul">Judul:</label>
-                            <input type="text" name="judul" id="judul" class="form__input">
+                            <label>Judul Album</label>
+                            <div>{{ form.judul_album | addclass:"form__input"}}</div>
                         </div>
                         <div class="row">
-                            <label for="label">Label:</label>
-                            <select name="label" id="label">
-                                <option value="label1">Label1</option>
-                                <option value="label2">Label2</option>
-                                <option value="label3">Label3</option>
-                            </select>
+                            <label>Artist: {{ request.session.nama }}</label>
+                        </div>
+                        <div class="row">
+                            <label>Label</label>
+                            <div>{{ form.daftar_label | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <h2>Lagu Pertama</h2>
+                        </div>
+                        <div class="row">
+                            <label>Judul Lagu</label>
+                            <div>{{ form.judul_lagu | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Songwriter</label>
+                            <div>{{ form.daftar_songwriter | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Genre</label>
+                            <div>{{ form.daftar_genre | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Durasi</label>
+                            <div>{{ form.durasi | addclass:"form__input"}}</div>
                         </div>
                         <div class="row">
                             <div class="row btn-container">
-                                <input type="submit" value="Submit" class="btn">
+                                <button type="submit" name="form_submit" class="btn">Submit</button>
                             </div>
                         </div>
+                        {% elif request.session.is_songwriter %}
+                        <div class="row">
+                            <label>Judul Album</label>
+                            <div>{{ form.judul_album | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Artist</label>
+                            <div>{{ form.daftar_artist | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Label</label>
+                            <div>{{ form.daftar_label | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <h2>Lagu Pertama</h2>
+                        </div>
+                        <div class="row">
+                            <label>Judul Lagu</label>
+                            <div>{{ form.judul_lagu | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Songwriter: {{ request.session.nama }}</label>
+                        </div>
+                        <div class="row">
+                            <label>Genre</label>
+                            <div>{{ form.daftar_genre | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <label>Durasi</label>
+                            <div>{{ form.durasi | addclass:"form__input"}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="row btn-container">
+                                <button type="submit" name="form_submit" class="btn">Submit</button>
+                            </div>
+                        </div>
+                        {% endif %}
                     </form>
                 </div>
             </div>
