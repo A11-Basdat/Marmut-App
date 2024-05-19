@@ -35,7 +35,6 @@ def pembayaran_paket(request, jenis):
         if paket:
             timestamp_dimulai = datetime.now()
 
-            # Hitung timestamp berakhir berdasarkan harga paket
             harga_paket = paket[1]
             if harga_paket == 54900:
                 periode_hari = 30
@@ -46,19 +45,24 @@ def pembayaran_paket(request, jenis):
             elif harga_paket == 658800:
                 periode_hari = 365
             else:
-                periode_hari = 30  # Nilai default jika harga paket tidak sesuai dengan yang diharapkan
+                periode_hari = 30 
 
             timestamp_berakhir = timestamp_dimulai + timedelta(days=periode_hari)  
+
+            try:
+                cursor.execute("""
+                    INSERT INTO premium (email)
+                    VALUES (%s)
+                """, [email])
+            except Exception as e:
+                error_message = "Gagal menambahkan akun premium. Kesalahan: {}".format(str(e))
+                messages.error(request, error_message)
+                return redirect('/user/langganan_paket', message='Gagal menambahkan akun premium. Akun telah berlangganan')  
 
             cursor.execute("""
                 INSERT INTO TRANSACTION (id, jenis_paket, email, timestamp_dimulai, timestamp_berakhir, metode_bayar, nominal)
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
             """, [uuid_generate_v4(), paket[0], email, timestamp_dimulai, timestamp_berakhir, payment_method, paket[1]])
-
-            cursor.execute("""
-                INSERT INTO premium (email)
-                VALUES (%s)
-            """, [email])
 
             messages.success(request, 'Pembayaran berhasil!')
             return redirect('/dashboard')  
