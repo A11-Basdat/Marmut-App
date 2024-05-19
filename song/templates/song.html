@@ -7,66 +7,315 @@
         <div class="register_form">
             <div class="container-fluid">
                 <div class="row">
-                    <h2>Daftar Lagu pada Album1</h2>
+                    <h2>Daftar Lagu pada {{ album_name }}</h2>
                 </div>
                 <br>
                 <div class="row">
-                    <table class="min-w-full text-sm font-dark overflow-hidden" style="color:#996f59; border-color: #996f59; border-width: 4px;">
-                        <tbody>
-                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59" >
-                            <td class="whitespace-nowrap px-6 py-4">Judul</td>
-                            <td class="whitespace-nowrap px-6 py-4">Durasi</td>
-                            <td class="whitespace-nowrap px-6 py-4">Total Play</td>
-                            <td class="whitespace-nowrap px-6 py-4">Total Download</td>
-                            <td class="whitespace-nowrap px-6 py-4">Action</td>
-                        </tr>
-                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
-                            <td class="whitespace-nowrap px-6 py-4">Lagu1</td>
-                            <td class="whitespace-nowrap px-6 py-4">2 menit</td>
-                            <td class="whitespace-nowrap px-6 py-4">3</td>
-                            <td class="whitespace-nowrap px-6 py-4">0</td>
-                            <td class="whitespace-nowrap px-6 py-4">
-                                <a href="#"><input type="submit" value="Lihat Detail" class="btn"></a> <br>
-                                <a href="#"><input type="submit" value="Hapus" class="btn"></a>
-                            </td>
-                        </tr>
-                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
-                            <td class="whitespace-nowrap px-6 py-4">Lagu2</td>
-                            <td class="whitespace-nowrap px-6 py-4">3 menit</td>
-                            <td class="whitespace-nowrap px-6 py-4">2</td>
-                            <td class="whitespace-nowrap px-6 py-4">2</td>
-                            <td class="whitespace-nowrap px-6 py-4">
-                                <a href="#"><input type="submit" value="Lihat Detail" class="btn"></a> <br>
-                                <a href="#"><input type="submit" value="Hapus" class="btn"></a>
-                            </td>
-                        </tr>
-                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
-                            <td class="whitespace-nowrap px-6 py-4">...</td>
-                            <td class="whitespace-nowrap px-6 py-4">...</td>
-                            <td class="whitespace-nowrap px-6 py-4">...</td>
-                            <td class="whitespace-nowrap px-6 py-4">...</td>
-                            <td class="whitespace-nowrap px-6 py-4">...</td>
-                        </tr>
+                    <table class="min-w-full text-sm font-dark overflow-hidden" style="color:#996f59" id="tabel_song">
+
                     </table>
+                    {% if request.session.is_artist or request.session.is_songwriter %}
                     <div class="row btn-container">
-                        <a href="{% url 'song:create_song' %}"><input type="submit" value="Create Lagu" class="btn"></a>
+                        <a href="{% url 'song:create_song' %}"><input type="submit" value="Create Song" class="btn"></a>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
 <style>
     td {
     border-width: 2px;
     border-color: #996f59;
+    padding:0em;
 }
 
-.btn {
-    width:40%;
+    .btn {
+    width:50%;
     margin: 0.5em;
     }
+
 </style>
+
+<script>
+    if ( "{{ context.judul_artist }}" !== "") {
+        listJudulString = "{{ context.judul_artist }}";
+        listDurasiString = "{{ context.durasi_artist }}";
+        listPlayString = "{{ context.play_artist }}";
+        listDownloadString = "{{ context.download_artist }}";
+
+        const listJudul = listJudulString.split(", ");
+        const listDurasi = listDurasiString.split(", ");
+        const listPlay = listPlayString.split(", ");
+        const listDownload = listDownloadString.split(", ");
+
+        const tabelUl = document.getElementById('tabel_song');
+
+        const trTitle = document.createElement('tr');
+            trTitle.classList.add('border', 'transition', 'duration-300', 'ease-in-out', 'bg-shark-700');
+
+            const tdTitle1 = document.createElement('td');
+            tdTitle1.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdTitle1.textContent = "Judul";
+            trTitle.appendChild(tdTitle1);
+
+            const tdTitle2 = document.createElement('td');
+            tdTitle2.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdTitle2.textContent = "Durasi";
+            trTitle.appendChild(tdTitle2);
+
+            const tdTitle3 = document.createElement('td');
+            tdTitle3.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdTitle3.textContent = "Total Play";
+            trTitle.appendChild(tdTitle3);
+
+            const tdTitle4 = document.createElement('td');
+            tdTitle4.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdTitle4.textContent = "Total Download";
+            trTitle.appendChild(tdTitle4);
+
+            const tdTitle5 = document.createElement('td');
+            tdTitle5.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdTitle5.textContent = "Actions";
+            trTitle.appendChild(tdTitle5);
+
+        tabelUl.appendChild(trTitle);
+
+        for (let i = 0; i < listJudul.length; i++) {
+            const tr = document.createElement('tr');
+            tr.classList.add('border', 'transition', 'duration-300', 'ease-in-out', 'bg-shark-700');
+
+            const tdJudul = document.createElement('td');
+            tdJudul.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdJudul.textContent = listJudul[i].trim();
+            tr.appendChild(tdJudul);
+
+            const tdLabel = document.createElement('td');
+            tdLabel.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdLabel.textContent = listDurasi[i].trim();
+            tr.appendChild(tdLabel);
+
+            const tdJumlah = document.createElement('td');
+            tdJumlah.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdJumlah.textContent = listPlay[i].trim();
+            tr.appendChild(tdJumlah);
+
+            const tdDurasi = document.createElement('td');
+            tdDurasi.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdDurasi.textContent = listDownload[i].trim() + " menit";
+            tr.appendChild(tdDurasi);
+
+            const tdActions = document.createElement('td');
+            tdActions.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+
+            const detailLink = document.createElement('a');
+            detailLink.href = "{% url 'royalti:royalti' %}";
+            const detailButton = document.createElement('input');
+            detailButton.type = "submit";
+            detailButton.value = "Lihat Detail";
+            detailButton.classList.add('btn');
+            detailLink.appendChild(detailButton);
+            tdActions.appendChild(detailLink);
+
+            const hapusLink = document.createElement('a');
+            hapusLink.href = "#";
+            const hapusButton = document.createElement('input');
+            hapusButton.type = "submit";
+            hapusButton.value = "Hapus";
+            hapusButton.classList.add('btn');
+            hapusLink.appendChild(hapusButton);
+            tdActions.appendChild(hapusLink);
+
+            tr.appendChild(tdActions);
+
+            tabelUl.appendChild(tr);
+        }
+    } else if ( "{{ context.judul_songwriter }}" !== "") {
+        listJudulString = "{{ context.judul_songwriter }}";
+        listDurasiString = "{{ context.durasi_songwriter }}";
+        listPlayString = "{{ context.play_songwriter }}";
+        listDownloadString = "{{ context.download_songwriter }}";
+
+        const listJudul = listJudulString.split(", ");
+        const listDurasi = listDurasiString.split(", ");
+        const listPlay = listPlayString.split(", ");
+        const listDownload = listDownloadString.split(", ");
+
+        const tabelUl = document.getElementById('tabel_song');
+
+        const trTitle = document.createElement('tr');
+        trTitle.classList.add('border', 'transition', 'duration-300', 'ease-in-out', 'bg-shark-700');
+
+        const tdTitle1 = document.createElement('td');
+        tdTitle1.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle1.textContent = "Judul";
+        trTitle.appendChild(tdTitle1);
+
+        const tdTitle2 = document.createElement('td');
+        tdTitle2.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle2.textContent = "Durasi";
+        trTitle.appendChild(tdTitle2);
+
+        const tdTitle3 = document.createElement('td');
+        tdTitle3.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle3.textContent = "Total Play";
+        trTitle.appendChild(tdTitle3);
+
+        const tdTitle4 = document.createElement('td');
+        tdTitle4.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle4.textContent = "Total Download";
+        trTitle.appendChild(tdTitle4);
+
+        const tdTitle5 = document.createElement('td');
+        tdTitle5.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle5.textContent = "Actions";
+        trTitle.appendChild(tdTitle5);
+
+        tabelUl.appendChild(trTitle);
+        for (let i = 0; i < listJudul.length; i++) {
+            const tr = document.createElement('tr');
+            tr.classList.add('border', 'transition', 'duration-300', 'ease-in-out', 'bg-shark-700');
+
+            const tdJudul = document.createElement('td');
+            tdJudul.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdJudul.textContent = listJudul[i].trim();
+            tr.appendChild(tdJudul);
+
+            const tdLabel = document.createElement('td');
+            tdLabel.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdLabel.textContent = listDurasi[i].trim();
+            tr.appendChild(tdLabel);
+
+            const tdJumlah = document.createElement('td');
+            tdJumlah.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdJumlah.textContent = listPlay[i].trim();
+            tr.appendChild(tdJumlah);
+
+            const tdDurasi = document.createElement('td');
+            tdDurasi.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdDurasi.textContent = listDownload[i].trim() + " menit";
+            tr.appendChild(tdDurasi);
+
+            const tdActions = document.createElement('td');
+            tdActions.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+
+            const detailLink = document.createElement('a');
+            detailLink.href = "{% url 'royalti:royalti' %}";
+            const detailButton = document.createElement('input');
+            detailButton.type = "submit";
+            detailButton.value = "Lihat Detail";
+            detailButton.classList.add('btn');
+            detailLink.appendChild(detailButton);
+            tdActions.appendChild(detailLink);
+
+            const hapusLink = document.createElement('a');
+            hapusLink.href = "#";
+            const hapusButton = document.createElement('input');
+            hapusButton.type = "submit";
+            hapusButton.value = "Hapus";
+            hapusButton.classList.add('btn');
+            hapusLink.appendChild(hapusButton);
+            tdActions.appendChild(hapusLink);
+
+            tr.appendChild(tdActions);
+
+            tabelUl.appendChild(tr);
+            }
+        } else if ( "{{ context.judul_label }}" !== "") {
+        listJudulString = "{{ context.judul_label }}";
+        listDurasiString = "{{ context.durasi_label }}";
+        listPlayString = "{{ context.play_label }}";
+        listDownloadString = "{{ context.download_label }}";
+
+        const listJudul = listJudulString.split(", ");
+        const listDurasi = listDurasiString.split(", ");
+        const listPlay = listPlayString.split(", ");
+        const listDownload = listDownloadString.split(", ");
+
+        const tabelUl = document.getElementById('tabel_song');
+
+        const trTitle = document.createElement('tr');
+        trTitle.classList.add('border', 'transition', 'duration-300', 'ease-in-out', 'bg-shark-700');
+
+        const tdTitle1 = document.createElement('td');
+        tdTitle1.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle1.textContent = "Judul";
+        trTitle.appendChild(tdTitle1);
+
+        const tdTitle2 = document.createElement('td');
+        tdTitle2.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle2.textContent = "Durasi";
+        trTitle.appendChild(tdTitle2);
+
+        const tdTitle3 = document.createElement('td');
+        tdTitle3.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle3.textContent = "Total Play";
+        trTitle.appendChild(tdTitle3);
+
+        const tdTitle4 = document.createElement('td');
+        tdTitle4.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle4.textContent = "Total Download";
+        trTitle.appendChild(tdTitle4);
+
+        const tdTitle5 = document.createElement('td');
+        tdTitle5.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle5.textContent = "Actions";
+        trTitle.appendChild(tdTitle5);
+
+        tabelUl.appendChild(trTitle);
+        for (let i = 0; i < listJudul.length; i++) {
+            const tr = document.createElement('tr');
+            tr.classList.add('border', 'transition', 'duration-300', 'ease-in-out', 'bg-shark-700');
+
+            const tdJudul = document.createElement('td');
+            tdJudul.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdJudul.textContent = listJudul[i].trim();
+            tr.appendChild(tdJudul);
+
+            const tdLabel = document.createElement('td');
+            tdLabel.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdLabel.textContent = listDurasi[i].trim();
+            tr.appendChild(tdLabel);
+
+            const tdJumlah = document.createElement('td');
+            tdJumlah.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdJumlah.textContent = listPlay[i].trim();
+            tr.appendChild(tdJumlah);
+
+            const tdDurasi = document.createElement('td');
+            tdDurasi.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdDurasi.textContent = listDownload[i].trim() + " menit";
+            tr.appendChild(tdDurasi);
+
+            const tdActions = document.createElement('td');
+            tdActions.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+
+            const detailLink = document.createElement('a');
+            detailLink.href = "{% url 'royalti:royalti' %}";
+            const detailButton = document.createElement('input');
+            detailButton.type = "submit";
+            detailButton.value = "Lihat Detail";
+            detailButton.classList.add('btn');
+            detailLink.appendChild(detailButton);
+            tdActions.appendChild(detailLink);
+
+            const hapusLink = document.createElement('a');
+            hapusLink.href = "#";
+            const hapusButton = document.createElement('input');
+            hapusButton.type = "submit";
+            hapusButton.value = "Hapus";
+            hapusButton.classList.add('btn');
+            hapusLink.appendChild(hapusButton);
+            tdActions.appendChild(hapusLink);
+
+            tr.appendChild(tdActions);
+
+            tabelUl.appendChild(tr);
+        }
+    }
+</script>
 
 {% endblock content %}

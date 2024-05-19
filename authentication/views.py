@@ -1,4 +1,5 @@
 import datetime
+import random
 import re
 import uuid
 from django.shortcuts import render, redirect
@@ -148,10 +149,13 @@ def podcaster_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_
 def artist_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role):
     try:
         id = uuid.uuid4()
+        id_phc = uuid.uuid4()
         cursor = connection.cursor()
         akun_query = insert_akun_query(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
         cursor.execute(akun_query)
-        artist_query = insert_artist_query(id, email)
+        phc_query = insert_phc_query(id_phc, random.randint(10, 15))
+        cursor.execute(phc_query)
+        artist_query = insert_artist_query(id, email, id_phc)
         cursor.execute(artist_query)
     except InternalError as e:
         return {
@@ -166,10 +170,13 @@ def artist_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asa
 def songwriter_register(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role):
     try:
         id = uuid.uuid4()
+        id_phc = uuid.uuid4()
         cursor = connection.cursor()
         akun_query = insert_akun_query(email, password, nama, tempat_lahir, tanggal_lahir, kota_asal, gender, role)
         cursor.execute(akun_query)
-        songwriter_query = insert_songwriter_query(id, email)
+        phc_query = insert_phc_query(id_phc, random.randint(10, 15))
+        cursor.execute(phc_query)
+        songwriter_query = insert_songwriter_query(id, email, id_phc)
         cursor.execute(songwriter_query)
     except InternalError as e:
         return {
