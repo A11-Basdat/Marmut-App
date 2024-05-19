@@ -167,3 +167,8 @@ def insert_songwriter_write_song_query(id_songwriter, id_song):
                         '{id_song}'
                     );
     """
+
+def delete_album_query(album_name):
+    return f"""
+        DELETE FROM ALBUM WHERE judul = '{album_name}';
+    """

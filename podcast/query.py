@@ -20,3 +20,28 @@ def get_podcast_query(podcast_id):
         WHERE 
         p.id_konten = '{podcast_id}';
     """
+
+def trigger_durasi():
+    return f""" 
+        CREATE OR REPLACE FUNCTION update_durasi_podcast()
+        RETURNS trigger AS
+        $$
+        BEGIN
+        IF TG_OP = 'DELETE' THEN
+        UPDATE KONTEN SET durasi = durasi - OLD.durasi WHERE id = OLD.id_konten_podcast;
+        ELSIF TG_OP = 'INSERT' THEN
+        UPDATE KONTEN SET durasi = durasi + NEW.durasi WHERE id = NEW.id_konten_podcast;
+        END IF;
+        RETURN NEW;
+        END;
+        $$
+        LANGUAGE plpgsql;
+        
+        CREATE TRIGGER episode_insert_trigger
+        AFTER INSERT ON EPISODE
+        FOR EACH ROW EXECUTE PROCEDURE update_durasi_podcast();
+        
+        CREATE TRIGGER episode_delete_trigger
+        AFTER DELETE ON EPISODE
+        FOR EACH ROW EXECUTE PROCEDURE update_durasi_podcast();
+    """

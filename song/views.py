@@ -92,11 +92,11 @@ def create_song(request):
             return redirect('song:song')
 
     elif request.session['is_songwriter']:
-        query = artist_find_query()
+        query = songwriter_find_query()
         cursor = connection.cursor()
         cursor.execute(query)
         res = parse(cursor)
-        artist = [(artist['id'], artist['nama']) for artist in res]
+        songwriter = [(songwriter['id'], songwriter['nama']) for songwriter in res]
 
         query = genre_find_query()
         cursor = connection.cursor()
@@ -104,25 +104,23 @@ def create_song(request):
         res = parse(cursor)
         genre = [(genre['genre'], genre['genre']) for genre in res]
 
-        form = createAlbumSongwriterForm(artist, genre, request.POST or None)
+        form = createSongArtistForm(songwriter, genre, request.POST or None)
 
         if request.method == 'POST' and 'form_submit' in request.POST and form.is_valid():
-            judul_album = form.cleaned_data['judul_album']
-            id_label = form.cleaned_data['daftar_label']
             judul_lagu = form.cleaned_data['judul_lagu']
-            id_artist = form.cleaned_data['daftar_artist']
+            id_songwriter = form.cleaned_data['daftar_songwriter']
             genre = form.cleaned_data['daftar_genre']
             durasi = form.cleaned_data['durasi']
             id_song = uuid.uuid4()
             date_ymd = datetime.now().strftime('%Y-%m-%d')
             date_y = datetime.now().strftime('%Y')
 
-            query = find_songwriter_id_hc(request.session['email'])
+            query = find_artist_id_hc(request.session['email'])
             cursor = connection.cursor()
             cursor.execute(query)
             res = cursor.fetchone()
-            id_songwriter = res[0]
-            id_phc_songwriter = res[1]
+            id_artist = res[0]
+            id_phc_artist = res[1]
 
             query = find_album(request.session['album_name'])
             cursor = connection.cursor()
@@ -133,7 +131,7 @@ def create_song(request):
             cursor.execute(query)
             query = insert_song_query(id_song, id_artist, id_album, 0, 0)
             cursor.execute(query)
-            query = insert_royalti_query(id_phc_songwriter, id_song, random.randint(2,6))
+            query = insert_royalti_query(id_phc_artist, id_song, random.randint(20000,60000))
             cursor.execute(query)
             query = insert_genre_query(id_song, genre)
             cursor.execute(query)
@@ -179,3 +177,11 @@ def downloaded_song(request):
             'is_premium': True
         }
     return render(request, "downloaded_song.html", context)
+
+def delete_song(request):
+    album = request.GET.get('album')
+    album_name = unquote(album)
+    cursor = connection.cursor()
+    query = delete_song_query(album_name)
+    cursor.execute(query)
+    return redirect('song:song')

@@ -112,7 +112,8 @@
             tdActions.appendChild(document.createElement('br'));
 
             const hapusLink = document.createElement('a');
-            hapusLink.href = "#";
+            const encodedAlbum2 = encodeURIComponent(listJudul[i].trim());
+            hapusLink.href = `/album/delete_album?album=${encodedAlbum2}`;
             const hapusButton = document.createElement('input');
             hapusButton.type = "submit";
             hapusButton.value = "Hapus";
@@ -218,7 +219,8 @@
             tdActions.appendChild(document.createElement('br'));
 
             const hapusLink = document.createElement('a');
-            hapusLink.href = "#";
+            const encodedAlbum2 = encodeURIComponent(listJudul[i].trim());
+            hapusLink.href = `/album/delete_album?album=${encodedAlbum2}`;
             const hapusButton = document.createElement('input');
             hapusButton.type = "submit";
             hapusButton.value = "Hapus";
@@ -323,7 +325,8 @@
             tdActions.appendChild(document.createElement('br'));
 
             const hapusLink = document.createElement('a');
-            hapusLink.href = "#";
+            const encodedAlbum2 = encodeURIComponent(listJudul[i].trim());
+            hapusLink.href = `/album/delete_album?album=${encodedAlbum2}`;
             const hapusButton = document.createElement('input');
             hapusButton.type = "submit";
             hapusButton.value = "Hapus";
