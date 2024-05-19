@@ -27,6 +27,5 @@ urlpatterns = [
     path('chart/', include('chart.urls')),
     path('song/', include('song.urls')),
     path('album/', include('album.urls')),
-    path('song/', include('song.urls')),
     path('royalti/', include('royalti.urls'))
 ]

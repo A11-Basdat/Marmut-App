@@ -9,7 +9,7 @@
         </div> 
         <div>
             <a href="/"></a>
-            <button type="button" class="btn btn-primary my-3" style="border-radius: 10px; width: 10%;">Kembali</button>
+            <button type="button" class="btn btn-primary my-3" style="border-radius: 10px; width: 10%;" onClick="goBack()">Kembali</button>
         </div>
         
     </div>
@@ -29,4 +29,9 @@
         {% endfor %}
     </div>
 </div>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 {% endblock content %}

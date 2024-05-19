@@ -8,6 +8,7 @@ import uuid
 from datetime import datetime
 
 def create_podcast(request):
+    email = request.session['email']
     cursor = connection.cursor()
 
     if request.method == 'POST':
@@ -27,12 +28,12 @@ def create_podcast(request):
 
         cursor.execute(f"""
             INSERT INTO GENRE VALUES 
-            ('{new_uuid}', '{genre}');
+            ('{new_uuid}', '{genre}');  
         """)
 
         cursor.execute(f"""
             INSERT INTO PODCAST  VALUES 
-            ('{new_uuid}', 'laisha07@example.net');
+            ('{new_uuid}', '{email}');
         """)
 
         cursor.execute(f"""
@@ -50,13 +51,15 @@ def create_podcast(request):
             'error': None
         }
 
-        return render(request, "createPodcast.html", context)
+        return redirect('podcast:list_podcast')
+    
+
 
     return render(request, "createPodcast.html")
 
 def list_podcast(request):
     cursor = connection.cursor()
-    email = 'laisha07@example.net'
+    email = request.session['email']
     cursor.execute(f"""
                 SELECT k.judul, k.durasi, k.id, COUNT(e.id_konten_podcast) AS episode_count
                 FROM podcast AS p
@@ -100,9 +103,18 @@ def create_episode(request, podcast_id):
             VALUES ('{new_uuid}','{podcast_id}', '{judul}', '{deskripsi}', '{durasi}', '{formatted_date}');
         """)
 
+        return redirect(reverse('podcast:list_episode', args=[podcast_id]))
 
+    cursor.execute(f"""
+            SELECT k.judul
+            FROM KONTEN as k, PODCAST as p
+            WHERE P.id_konten = k.id and P.id_konten = '{podcast_id}';
+    """)
+
+    result = cursor.fetchall()[0][0]
     context = {
-        'podcast_id': podcast_id
+        'podcast_id': podcast_id,
+        'judul' : result
     }
 
     return render(request, "createEpisode.html", context)
@@ -144,7 +156,9 @@ def play_podcast(request, podcast_id):
     cursor.execute(get_podcast_query(podcast_id))
 
     results = cursor.fetchall()
+    print(results)
     podcast = format_podcast_data(results)
+    print(podcast)
 
     return render(request, "detailPodcast.html", podcast)
 
