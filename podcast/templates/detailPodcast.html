@@ -25,11 +25,12 @@
                 <p class="fw-semibold mb-0">Tanggal Rilis: </p><p class="m-0">{{tanggal_rilis}}</p>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" style="border-radius: 10px; width: 10%;">Kembali</button>
+        <button type="button" class="btn btn-primary" style="border-radius: 10px; width: 10%;" onclick="goBack()">Kembali</button>
         <div>
             <div>
                 <h3 class="fw-bold">Daftar Episode</h3>
             </div>
+            {% if episodes %}
             <div>
                 {% for eps in episodes %}
                 <div class="card mb-3 fc-primary">
@@ -51,12 +52,16 @@
                     </div>
                 </div>
                 {% endfor %}
-            </div>        
+            </div>   
+            {% else %}
+                <p>No Episode Found</p>
+            {% endif %}     
         </div>
     </div>
-
 </div>
 <script>
-    const genre = "{{genre}}"
+    function goBack() {
+        window.history.back();
+    }
 </script>
 {% endblock content %}
