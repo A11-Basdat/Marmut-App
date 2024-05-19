@@ -4,43 +4,95 @@
 {% block content %}
     <div class="container mt-5">
         <h2 class="text-center">SEARCH BAR</h2>
-        <form action="" method="GET" class="mt-4">
+        <form action="{% url 'dashboard:search_bar' %}" method="GET" class="mt-4">
             <div class="form-group mx-auto text-center">
-                <input style="width: 50%;" type="text" class="form-control mx-auto" id="query" name="query" placeholder="Masukkan judul/nama">
+                <input style="width: 50%;" type="text" class="form-control mx-auto" id="query" name="query" placeholder="Masukkan judul/nama" value="{{ query }}">
             </div>
             <div class="text-center">
-                <a style="width: 25%;" href="" class="btn btn-primary">Cari</a>
+                <button type="submit" class="btn btn-primary" style="width: 25%;">Cari</button>
             </div>
         </form>
     </div>
 
-    <div class="container mt-5">
-        <h2 class="text-center">Hasil Pencarian</h2>
-        <div class="mt-4">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Tipe</th>
-                        <th scope="col">Judul</th>
-                        <th scope="col">Oleh</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Podcast</td>
-                        <td>The Michelle Obama Podcast</td>
-                        <td>Vickie Rempel</td>
-                        <td><a>[Lihat]</a></td>
-                    </tr>
-                    <tr>
-                        <td>Song</td>
-                        <td>Dance Monkey</td>
-                        <td>Laisha McGlynn</td>
-                        <td><a>[Lihat]</a></td>
-                    </tr>
-                </tbody>
-            </table>
+    {% if podcasts or songs or user_playlists %}
+        <div class="container mt-5">
+            <h2 class="text-center">Hasil Pencarian</h2>
+            
+            {% if podcasts %}
+            <div class="mt-4">
+                <h3>Podcasts</h3>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Judul</th>
+                            <th scope="col">Oleh</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in podcasts %}
+                        <tr>
+                            <td>{{ result.1 }}</td>
+                            <td>{{ result.2 }}</td>
+                            <td><a href="#">[Lihat]</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+
+            {% if songs %}
+            <div class="mt-4">
+                <h3>Songs</h3>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Judul</th>
+                            <th scope="col">Oleh</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in songs %}
+                        <tr>
+                            <td>{{ result.1 }}</td>
+                            <td>{{ result.2 }}</td>
+                            <td><a href="#">[Lihat]</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+
+            {% if user_playlists %}
+            <div class="mt-4">
+                <h3>User Playlists</h3>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Judul</th>
+                            <th scope="col">Oleh</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in user_playlists %}
+                        <tr>
+                            <td>{{ result.1 }}</td>
+                            <td>{{ result.2 }}</td>
+                            <td><a href="#">[Lihat]</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
         </div>
+    {% else %}
+    <div class="container mt-5">
+        <p class="text-center">Tidak ada hasil pencarian untuk "{{ query }}".</p>
     </div>
+    {% endif %}
 {% endblock content %}
