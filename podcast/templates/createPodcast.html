@@ -7,40 +7,73 @@
         <div class="pb-3">
             <h1 class="fw-bold">Buat Podcast</h1>
         </div>
-        <div>
-            <div class="mb-2 row">
-                <label class="col-sm-1 col-form-label fw-semibold">Judul</label>
-                <div class="col-sm-11">
-                    <input class="form-control" type="text" aria-label="default input example">
+        <form method="post" action="/podcast/create-podcast/">
+        {% csrf_token %}
+            <div>
+                <div class="mb-2 row">
+                    <label class="col-sm-1 col-form-label fw-semibold">Judul</label>
+                    <div class="col-sm-11">
+                        <input class="form-control" name='judul' type="text" aria-label="default input example">
+                    </div>
+                </div>
+                <div class="mb-2 row">
+                    <label class="col-sm-1 col-form-label fw-semibold">Genre</label>
+                    <div class="col-sm-11">
+                    <select class="form-select fc-primary" name="genre">
+                        <option selected>Pilih Genre</option>
+                        <option value="True Crime" >True Crime</option>
+                        <option value="Personal Stories">Personal Stories</option>
+                        <option value="Culture">Culture</option>
+                        <option value="Society" >Society</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Culture">Culture</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="mb-2 row">
+                    <label class="col-sm-1 col-form-label fw-semibold" >Durasi</label>
+                    <div class="col-sm-11">
+                        <input class="form-control" type="text" name='durasi' aria-label="default input example">
+                    </div>
+                </div>
+                <div class="mb-2 row">
+                    <div class="col-sm-12 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Buat Podcast</button>
+                    </div>
                 </div>
             </div>
-            <div class="mb-2 row">
-                <label class="col-sm-1 col-form-label fw-semibold">Genre</label>
-                <div class="col-sm-11">
-                <select class="form-select fc-primary">
-                    <option selected>Pilih Genre</option>
-                    <option value="1" >True Crime</option>
-                    <option value="2">Personal Stories</option>
-                    <option value="3">Culture</option>
-                    <option value="4" >Society</option>
-                    <option value="5">Sports</option>
-                    <option value="6">Culture</option>
-                  </select>
-                </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Podcast Created Successfully</h5>
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="mb-2 row">
-                <label class="col-sm-1 col-form-label fw-semibold">Durasi</label>
-                <div class="col-sm-11">
-                    <input class="form-control" type="text" aria-label="default input example">
-                </div>
+            <div class="modal-body">
+                <p>Judul: {{ judul }}</p>
+                <p>Genre: {{ genre }}</p>
+                <p>Durasi: {{ durasi }}</p>
             </div>
-            <div class="mb-2 row">
-                <div class="col-sm-12 d-flex justify-content-center">
-                    <button type="button" class="btn btn-primary">Buat Podcast</button>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-
 </div>
+
+{% if judul and genre and durasi and not error %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#successModal').modal('show');
+        });
+    </script>
+{% endif %}
+
 {% endblock content %}
+
+

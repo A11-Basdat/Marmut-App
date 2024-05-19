@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.db import connection
+from chart.query import get_songlist_query
 
 def list_chart(request):
     cursor = connection.cursor()
@@ -14,32 +15,7 @@ def list_chart(request):
 
 def detail_chart(request, chart_id):
     cursor = connection.cursor()
-    cursor.execute(f"""
-            SELECT 
-                c.tipe,
-                k.judul, 
-                ak.nama, 
-                k.tanggal_rilis, 
-                s.total_play, 
-                s.id_konten
-            FROM 
-                chart c
-            JOIN 
-                playlist_song ps ON c.id_playlist = ps.id_playlist
-            JOIN 
-                song s ON ps.id_song = s.id_konten
-            JOIN 
-                konten k ON s.id_konten = k.id
-            JOIN 
-                artist a ON s.id_artist = a.id
-            JOIN 
-                akun ak ON a.email_akun = ak.email
-            WHERE 
-                c.id_playlist = '{chart_id}'
-
-            ORDER BY 
-                s.total_play DESC;
-    """)
+    cursor.execute(get_songlist_query(chart_id))
 
     results = cursor.fetchall()
     judul_playlist = results[0][0]
@@ -56,7 +32,5 @@ def detail_chart(request, chart_id):
                 for _, judul, artist, tanggal_rilis, total_play, id_konten in results
             ]
     }
-
-    print(songs)
 
     return render(request, "detailChart.html", songs)
