@@ -7,6 +7,7 @@
         <h2 class="text-center">DOWNLOADED SONGS</h2>
         <div class="row mt-4">
             <div class="col">
+                {% if is_premium %}
                 <h4 class="text-center">Daftar Lagu</h4>
                 <table style="width:75%;" class="table table-bordered table-striped text-center mx-auto">
                     <thead class="thead-dark">
@@ -31,10 +32,13 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                {% else %}
+                <p class="text-center">Anda harus menjadi pengguna premium untuk mengakses daftar lagu yang diunduh.</p>
+                {% endif %}
             </div>
         </div>
         <div class="row justify-content-center">
-            <a style="width: 25%;" href="" class="btn btn-secondary">Kembali</a>
+            <a style="width: 25%;" href="/dashboard/" class="btn btn-secondary">Kembali</a>
         </div>
     </div>
 {% endblock content %}
