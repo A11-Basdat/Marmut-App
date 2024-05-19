@@ -34,7 +34,21 @@ def pembayaran_paket(request, jenis):
 
         if paket:
             timestamp_dimulai = datetime.now()
-            timestamp_berakhir = timestamp_dimulai + timedelta(days=30)  
+
+            # Hitung timestamp berakhir berdasarkan harga paket
+            harga_paket = paket[1]
+            if harga_paket == 54900:
+                periode_hari = 30
+            elif harga_paket == 164700:
+                periode_hari = 90
+            elif harga_paket == 329400:
+                periode_hari = 180
+            elif harga_paket == 658800:
+                periode_hari = 365
+            else:
+                periode_hari = 30  # Nilai default jika harga paket tidak sesuai dengan yang diharapkan
+
+            timestamp_berakhir = timestamp_dimulai + timedelta(days=periode_hari)  
 
             cursor.execute("""
                 INSERT INTO TRANSACTION (id, jenis_paket, email, timestamp_dimulai, timestamp_berakhir, metode_bayar, nominal)
@@ -57,6 +71,7 @@ def pembayaran_paket(request, jenis):
         'harga': results[1]
     }
     return render(request, "pembayaran_paket.html", context)
+
 
 def riwayat_transaksi(request): 
     if 'email' not in request.session:
