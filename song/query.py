@@ -159,3 +159,33 @@ def insert_songwriter_write_song_query(id_songwriter, id_song):
                         '{id_song}'
                     );
     """
+
+def delete_song_query(song_name):
+    return f"""
+        DELETE FROM KONTEN WHERE judul = '{song_name}';
+    """
+
+def trigger_lagu():
+    return f"""
+        CREATE OR REPLACE FUNCTION update_durasi_album()
+        RETURNS trigger AS
+        $$
+        BEGIN
+        IF TG_OP = 'DELETE' THEN
+        UPDATE ALBUM SET total_durasi = total_durasi - OLD.durasi WHERE id = OLD.id_album;
+        ELSIF TG_OP = 'INSERT' THEN
+        UPDATE ALBUM SET total_durasi = total_durasi + NEW.durasi WHERE id = NEW.id_album;
+        END IF;
+        RETURN NEW;
+        END;
+        $$
+        LANGUAGE plpgsql;
+        
+        CREATE TRIGGER song_insert_trigger
+        AFTER INSERT ON SONG
+        FOR EACH ROW EXECUTE PROCEDURE update_durasi_album();
+        
+        CREATE TRIGGER song_delete_trigger
+        AFTER DELETE ON SONG
+        FOR EACH ROW EXECUTE PROCEDURE update_durasi_album();
+    """

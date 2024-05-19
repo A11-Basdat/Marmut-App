@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from base.helper.function import parse
 from album.query import *
 from album.forms import *
+from urllib.parse import unquote
 
 def album(request):
     context = {}
@@ -152,5 +153,10 @@ def create_album(request):
     return render(request, 'createAlbum.html', context)
 
 
-
-
+def delete_album(request):
+    album = request.GET.get('album')
+    album_name = unquote(album)
+    cursor = connection.cursor()
+    query = delete_album_query(album_name)
+    cursor.execute(query)
+    return redirect('album:album')
