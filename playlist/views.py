@@ -13,6 +13,7 @@ import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from django.db import connection 
 
 def userplaylist(request):
     return render(request, "userplaylist.html")
@@ -45,4 +46,6 @@ def deleteplaylist(request, id):
     playlist = Playlist.objects.get(pk = id)
     playlist.delete()
     return HttpResponseRedirect(reverse('playlist:userplaylist'))
+
+
 
