@@ -41,5 +41,8 @@ def editplaylist(request, id):
     context = {'form': form}
     return render(request, "editplaylist.html", context)
 
-
+def deleteplaylist(request, id):
+    playlist = Playlist.objects.get(pk = id)
+    playlist.delete()
+    return HttpResponseRedirect(reverse('playlist:userplaylist'))
 
