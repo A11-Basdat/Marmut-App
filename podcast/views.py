@@ -14,7 +14,7 @@ def create_podcast(request):
     if request.method == 'POST':
         judul = request.POST.get('judul')
         genre = request.POST.get('genre')
-        durasi = request.POST.get('durasi')
+        # durasi = request.POST.get('durasi')
 
         new_uuid = str(uuid.uuid4())
         current_datetime = datetime.now()
@@ -23,7 +23,7 @@ def create_podcast(request):
 
         cursor.execute(f"""
             INSERT INTO KONTEN 
-            VALUES ('{new_uuid}', '{judul}', '{formatted_date}', '{current_year}', '{durasi}');
+            VALUES ('{new_uuid}', '{judul}', '{formatted_date}', '{current_year}', '0');
         """)
 
         cursor.execute(f"""
