@@ -7,8 +7,9 @@
         <h2 class="text-center">DOWNLOADED SONGS</h2>
         <div class="row mt-4">
             <div class="col">
+                {% if is_premium %}
                 <h4 class="text-center">Daftar Lagu</h4>
-                <table style="Width:75%", class="table table-bordered table-striped text-center mx-auto">
+                <table style="width:75%;" class="table table-bordered table-striped text-center mx-auto">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col" class="col-1">Judul Lagu</th>
@@ -18,31 +19,26 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for result in results %}
                         <tr>
-                            <td>Song1</td>
-                            <td>Artist1</td>
-                            <td>20/02/2024</td>
+                            <td>{{ result.0 }}</td>
+                            <td>{{ result.1 }}</td>
+                            <td>{{ result.2|date:"d/m/Y" }}</td>
                             <td>
                                 <a class="text-decoration-none font-weight-bold">Lihat</a>
                                 <a class="text-decoration-none font-weight-bold">Hapus</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Song2</td>
-                            <td>Artist2</td>
-                            <td>21/03/2024</td>
-                            <td>
-                                <a class="text-decoration-none font-weight-bold">Lihat</a>
-                                <a class="text-decoration-none font-weight-bold">Hapus</a>
-                            </td>
-                        </tr>
-                        <!-- Other songs -->
+                        {% endfor %}
                     </tbody>
                 </table>
+                {% else %}
+                <p class="text-center">Anda harus menjadi pengguna premium untuk mengakses daftar lagu yang diunduh.</p>
+                {% endif %}
             </div>
         </div>
         <div class="row justify-content-center">
-            <a style="width: 25%;" href="" class="btn btn-secondary">Kembali</a>
+            <a style="width: 25%;" href="/dashboard/" class="btn btn-secondary">Kembali</a>
         </div>
     </div>
 {% endblock content %}

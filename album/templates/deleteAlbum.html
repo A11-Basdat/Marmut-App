@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row main-content bg-success text-center">
+    <div class="register_form">
+      <div class="container-fluid">
+        <div class="row">
+          <h2>{{ request.session.album_name }} has been deleted.</h2>
+        </div>
+        <div>
+          <a href=`"></a>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+    td {
+    border-width: 2px;
+    border-color: #996f59;
+    padding:0em;
+}
+
+    .btn {
+    width:50%;
+    margin: 0.5em;
+    }
+
+</style>
+
+{% endblock content %}

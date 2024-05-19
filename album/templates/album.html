@@ -11,49 +11,14 @@
                 </div>
                 <br>
                 <div class="row">
-                    <table class="min-w-full text-sm font-dark overflow-hidden" style="color:#996f59">
-                        <tbody>
-                        <tr class="border-996f59-4 transition duration-300 ease-in-out bg-shark-700">
-                            <td class="whitespace-nowrap px-6 py-4">Judul</td>
-                            <td class="whitespace-nowrap px-6 py-4">Label</td>
-                            <td class="whitespace-nowrap px-6 py-4">Jumlah Lagu</td>
-                            <td class="whitespace-nowrap px-6 py-4">Total Durasi</td>
-                            <td class="whitespace-nowrap px-6 py-4">Action</td>
-                        </tr>
-                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
-                            <td class="whitespace-nowrap px-6 py-4">Album1</td>
-                            <td class="whitespace-nowrap px-6 py-4">LabelA</td>
-                            <td class="whitespace-nowrap px-6 py-4">0</td>
-                            <td class="whitespace-nowrap px-6 py-4">0 menit</td>
-                            <td class="whitespace-nowrap px-6 py-4">
-                                <a href="{% url 'song:song' %}"><input type="submit" value="Lihat Daftar Lagu" class="btn"></a> <br>
-                                <a href="{% url 'song:create_song' %}"><input type="submit" value="Tambah Lagu" class="btn"></a> <br>
-                                <a href="#"><input type="submit" value="Hapus" class="btn"></a>
-                            </td>
-                        </tr>
-                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
-                            <td class="whitespace-nowrap px-6 py-4">Album2</td>
-                            <td class="whitespace-nowrap px-6 py-4">LabelB</td>
-                            <td class="whitespace-nowrap px-6 py-4">0</td>
-                            <td class="whitespace-nowrap px-6 py-4">4 menit</td>
-                            <td class="whitespace-nowrap px-6 py-4">
-                                <a href="{% url 'song:song' %}"><input type="submit" value="Lihat Daftar Lagu" class="btn"></a> <br>
-                                <a href="{% url 'song:create_song' %}"><input type="submit" value="Tambah Lagu" class="btn"></a> <br>
-                                <a href="#"><input type="submit" value="Hapus" class="btn"></a>
-                            </td>
-                        </tr>
-                        <tr class="border transition duration-300 ease-in-out bg-shark-700 border-996f59">
-                            <td class="whitespace-nowrap px-6 py-4">...</td>
-                            <td class="whitespace-nowrap px-6 py-4">...</td>
-                            <td class="whitespace-nowrap px-6 py-4">...</td>
-                            <td class="whitespace-nowrap px-6 py-4">...</td>
-                            <td class="whitespace-nowrap px-6 py-4">...</td>
-                        </tr>
+                    <table class="min-w-full text-sm font-dark overflow-hidden" style="color:#996f59" id="tabel_album">
+
                     </table>
+                    {% if request.session.is_artist or request.session.is_songwriter %}
                     <div class="row btn-container">
                         <a href="{% url 'album:create_album' %}"><input type="submit" value="Create Album" class="btn"></a>
-                        <a href="{% url 'album:album_label' %}"><input type="submit" value="Album Label(Temp)" class="btn"></a>
-                </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -74,5 +39,306 @@
     }
 
 </style>
+
+<script>
+    if ( "{{ jumlah_judul_label }}" !== "") {
+        listJudulString = "{{ jumlah_judul_label }}";
+        listJumlahString = "{{ total_lagu_label }}";
+        listDurasiString = "{{ jumlah_durasi_label }}";
+
+        const listJudul = listJudulString.split(", ");
+        const listJumlah = listJumlahString.split(", ");
+        const listDurasi = listDurasiString.split(", ");
+
+        const tabelUl = document.getElementById('tabel_album');
+
+        const trTitle = document.createElement('tr');
+        trTitle.classList.add('border', 'transition', 'duration-300', 'ease-in-out', 'bg-shark-700');
+
+        const tdTitle1 = document.createElement('td');
+        tdTitle1.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle1.textContent = "Judul";
+        trTitle.appendChild(tdTitle1);
+
+        const tdTitle2 = document.createElement('td');
+        tdTitle2.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle2.textContent = "Jumlah Lagu";
+        trTitle.appendChild(tdTitle2);
+
+        const tdTitle3 = document.createElement('td');
+        tdTitle3.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle3.textContent = "Total Durasi";
+        trTitle.appendChild(tdTitle3);
+
+        const tdTitle4 = document.createElement('td');
+        tdTitle4.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle4.textContent = "Actions";
+        trTitle.appendChild(tdTitle4);
+
+        tabelUl.appendChild(trTitle);
+
+        for (let i = 0; i < listJudul.length; i++) {
+            const tr = document.createElement('tr');
+            tr.classList.add('border', 'transition', 'duration-300', 'ease-in-out', 'bg-shark-700');
+
+            const tdJudul = document.createElement('td');
+            tdJudul.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdJudul.textContent = listJudul[i].trim();
+            tr.appendChild(tdJudul);
+
+            const tdJumlah = document.createElement('td');
+            tdJumlah.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdJumlah.textContent = listJumlah[i].trim();
+            tr.appendChild(tdJumlah);
+
+            const tdDurasi = document.createElement('td');
+            tdDurasi.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdDurasi.textContent = listDurasi[i].trim() + " menit";
+            tr.appendChild(tdDurasi);
+
+            const tdActions = document.createElement('td');
+            tdActions.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+
+            const lihatDaftarLaguLink = document.createElement('a');
+            const encodedAlbum = encodeURIComponent(listJudul[i].trim());
+            lihatDaftarLaguLink.href = `/song/view?album=${encodedAlbum}`;
+            const lihatDaftarLaguButton = document.createElement('input');
+            lihatDaftarLaguButton.type = "submit";
+            lihatDaftarLaguButton.value = "Lihat Daftar Lagu";
+            lihatDaftarLaguButton.classList.add('btn');
+            lihatDaftarLaguLink.appendChild(lihatDaftarLaguButton);
+            tdActions.appendChild(lihatDaftarLaguLink);
+
+            tdActions.appendChild(document.createElement('br'));
+
+            const hapusLink = document.createElement('a');
+            const encodedAlbum2 = encodeURIComponent(listJudul[i].trim());
+            hapusLink.href = `/album/delete_album?album=${encodedAlbum2}`;
+            const hapusButton = document.createElement('input');
+            hapusButton.type = "submit";
+            hapusButton.value = "Hapus";
+            hapusButton.classList.add('btn');
+            hapusLink.appendChild(hapusButton);
+            tdActions.appendChild(hapusLink);
+
+            tr.appendChild(tdActions);
+
+            tabelUl.appendChild(tr);
+        }
+    } else if ( "{{ jumlah_judul_artist }}" !== "") {
+        listJudulString = "{{ jumlah_judul_artist }}";
+        listLabelString = "{{ jumlah_label_artist }}";
+        listJumlahString = "{{ total_lagu_artist }}";
+        listDurasiString = "{{ jumlah_durasi_artist }}";
+
+        const listJudul = listJudulString.split(", ");
+        const listLabel = listLabelString.split(", ");
+        const listJumlah = listJumlahString.split(", ");
+        const listDurasi = listDurasiString.split(", ");
+
+        const tabelUl = document.getElementById('tabel_album');
+
+        const trTitle = document.createElement('tr');
+            trTitle.classList.add('border', 'transition', 'duration-300', 'ease-in-out', 'bg-shark-700');
+
+            const tdTitle1 = document.createElement('td');
+            tdTitle1.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdTitle1.textContent = "Judul";
+            trTitle.appendChild(tdTitle1);
+
+            const tdTitle2 = document.createElement('td');
+            tdTitle2.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdTitle2.textContent = "Label";
+            trTitle.appendChild(tdTitle2);
+
+            const tdTitle3 = document.createElement('td');
+            tdTitle3.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdTitle3.textContent = "Jumlah Lagu";
+            trTitle.appendChild(tdTitle3);
+
+            const tdTitle4 = document.createElement('td');
+            tdTitle4.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdTitle4.textContent = "Total Durasi";
+            trTitle.appendChild(tdTitle4);
+
+            const tdTitle5 = document.createElement('td');
+            tdTitle5.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdTitle5.textContent = "Actions";
+            trTitle.appendChild(tdTitle5);
+
+        tabelUl.appendChild(trTitle);
+
+        for (let i = 0; i < listJudul.length; i++) {
+            const tr = document.createElement('tr');
+            tr.classList.add('border', 'transition', 'duration-300', 'ease-in-out', 'bg-shark-700');
+
+            const tdJudul = document.createElement('td');
+            tdJudul.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdJudul.textContent = listJudul[i].trim();
+            tr.appendChild(tdJudul);
+
+            const tdLabel = document.createElement('td');
+            tdLabel.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdLabel.textContent = listLabel[i].trim();
+            tr.appendChild(tdLabel);
+
+            const tdJumlah = document.createElement('td');
+            tdJumlah.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdJumlah.textContent = listJumlah[i].trim();
+            tr.appendChild(tdJumlah);
+
+            const tdDurasi = document.createElement('td');
+            tdDurasi.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdDurasi.textContent = listDurasi[i].trim() + " menit";
+            tr.appendChild(tdDurasi);
+
+            const tdActions = document.createElement('td');
+            tdActions.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+
+            const lihatDaftarLaguLink = document.createElement('a');
+            const encodedAlbum = encodeURIComponent(listJudul[i].trim());
+            lihatDaftarLaguLink.href = `/song/view?album=${encodedAlbum}`;
+            const lihatDaftarLaguButton = document.createElement('input');
+            lihatDaftarLaguButton.type = "submit";
+            lihatDaftarLaguButton.value = "Lihat Daftar Lagu";
+            lihatDaftarLaguButton.classList.add('btn');
+            lihatDaftarLaguLink.appendChild(lihatDaftarLaguButton);
+            tdActions.appendChild(lihatDaftarLaguLink);
+
+            tdActions.appendChild(document.createElement('br'));
+
+            const tambahLaguLink = document.createElement('a');
+            tambahLaguLink.href = "{% url 'song:create_song' %}";
+            const tambahLaguButton = document.createElement('input');
+            tambahLaguButton.type = "submit";
+            tambahLaguButton.value = "Tambah Lagu";
+            tambahLaguButton.classList.add('btn');
+            tambahLaguLink.appendChild(tambahLaguButton);
+            tdActions.appendChild(tambahLaguLink);
+
+            tdActions.appendChild(document.createElement('br'));
+
+            const hapusLink = document.createElement('a');
+            const encodedAlbum2 = encodeURIComponent(listJudul[i].trim());
+            hapusLink.href = `/album/delete_album?album=${encodedAlbum2}`;
+            const hapusButton = document.createElement('input');
+            hapusButton.type = "submit";
+            hapusButton.value = "Hapus";
+            hapusButton.classList.add('btn');
+            hapusLink.appendChild(hapusButton);
+            tdActions.appendChild(hapusLink);
+
+            tr.appendChild(tdActions);
+
+            tabelUl.appendChild(tr);
+        }
+    } else if ( "{{ jumlah_judul_songwriter }}" !== "") {
+        listJudulString = "{{ jumlah_judul_songwriter }}";
+        listLabelString = "{{ jumlah_label_songwriter }}";
+        listJumlahString = "{{ total_lagu_songwriter }}";
+        listDurasiString = "{{ jumlah_durasi_songwriter }}";
+
+        const listJudul = listJudulString.split(", ");
+        const listLabel = listLabelString.split(", ");
+        const listJumlah = listJumlahString.split(", ");
+        const listDurasi = listDurasiString.split(", ");
+
+        const tabelUl = document.getElementById('tabel_album');
+
+        const trTitle = document.createElement('tr');
+        trTitle.classList.add('border', 'transition', 'duration-300', 'ease-in-out', 'bg-shark-700');
+
+        const tdTitle1 = document.createElement('td');
+        tdTitle1.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle1.textContent = "Judul";
+        trTitle.appendChild(tdTitle1);
+
+        const tdTitle2 = document.createElement('td');
+        tdTitle2.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle2.textContent = "Label";
+        trTitle.appendChild(tdTitle2);
+
+        const tdTitle3 = document.createElement('td');
+        tdTitle3.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle3.textContent = "Jumlah Lagu";
+        trTitle.appendChild(tdTitle3);
+
+        const tdTitle4 = document.createElement('td');
+        tdTitle4.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle4.textContent = "Total Durasi";
+        trTitle.appendChild(tdTitle4);
+
+        const tdTitle5 = document.createElement('td');
+        tdTitle5.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+        tdTitle5.textContent = "Actions";
+        trTitle.appendChild(tdTitle5);
+
+        tabelUl.appendChild(trTitle);
+        for (let i = 0; i < listJudul.length; i++) {
+            const tr = document.createElement('tr');
+            tr.classList.add('border', 'transition', 'duration-300', 'ease-in-out', 'bg-shark-700');
+
+            const tdJudul = document.createElement('td');
+            tdJudul.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdJudul.textContent = listJudul[i].trim();
+            tr.appendChild(tdJudul);
+
+            const tdLabel = document.createElement('td');
+            tdLabel.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdLabel.textContent = listLabel[i].trim();
+            tr.appendChild(tdLabel);
+
+            const tdJumlah = document.createElement('td');
+            tdJumlah.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdJumlah.textContent = listJumlah[i].trim();
+            tr.appendChild(tdJumlah);
+
+            const tdDurasi = document.createElement('td');
+            tdDurasi.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+            tdDurasi.textContent = listDurasi[i].trim() + " menit";
+            tr.appendChild(tdDurasi);
+
+            const tdActions = document.createElement('td');
+            tdActions.classList.add('whitespace-nowrap', 'px-6', 'py-4');
+
+            const lihatDaftarLaguLink = document.createElement('a');
+            const encodedAlbum = encodeURIComponent(listJudul[i].trim());
+            lihatDaftarLaguLink.href = `/song/view?album=${encodedAlbum}`;
+            const lihatDaftarLaguButton = document.createElement('input');
+            lihatDaftarLaguButton.type = "submit";
+            lihatDaftarLaguButton.value = "Lihat Daftar Lagu";
+            lihatDaftarLaguButton.classList.add('btn');
+            lihatDaftarLaguLink.appendChild(lihatDaftarLaguButton);
+            tdActions.appendChild(lihatDaftarLaguLink);
+
+            tdActions.appendChild(document.createElement('br'));
+
+            const tambahLaguLink = document.createElement('a');
+            tambahLaguLink.href = "{% url 'song:create_song' %}";
+            const tambahLaguButton = document.createElement('input');
+            tambahLaguButton.type = "submit";
+            tambahLaguButton.value = "Tambah Lagu";
+            tambahLaguButton.classList.add('btn');
+            tambahLaguLink.appendChild(tambahLaguButton);
+            tdActions.appendChild(tambahLaguLink);
+
+            tdActions.appendChild(document.createElement('br'));
+
+            const hapusLink = document.createElement('a');
+            const encodedAlbum2 = encodeURIComponent(listJudul[i].trim());
+            hapusLink.href = `/album/delete_album?album=${encodedAlbum2}`;
+            const hapusButton = document.createElement('input');
+            hapusButton.type = "submit";
+            hapusButton.value = "Hapus";
+            hapusButton.classList.add('btn');
+            hapusLink.appendChild(hapusButton);
+            tdActions.appendChild(hapusLink);
+
+            tr.appendChild(tdActions);
+
+            tabelUl.appendChild(tr);
+        }
+    }
+</script>
 
 {% endblock content %}
