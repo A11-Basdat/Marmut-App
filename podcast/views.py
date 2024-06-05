@@ -11,6 +11,25 @@ def create_podcast(request):
     email = request.session['email']
     cursor = connection.cursor()
 
+    cursor.execute(f"""
+        SELECT DISTINCT genre
+        FROM GENRE;
+    """)
+
+    results = cursor.fetchall()
+    
+    genres = {
+        'genres': [
+        {
+            'genre': result[0]
+        }
+        for result in results
+        ]
+    }
+
+    print(genres)
+
+
     if request.method == 'POST':
         judul = request.POST.get('judul')
         genre = request.POST.get('genre')
@@ -52,10 +71,8 @@ def create_podcast(request):
         }
 
         return redirect('podcast:list_podcast')
-    
 
-
-    return render(request, "createPodcast.html")
+    return render(request, "createPodcast.html", genres)
 
 def list_podcast(request):
     cursor = connection.cursor()
