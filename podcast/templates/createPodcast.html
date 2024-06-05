@@ -21,21 +21,18 @@
                     <div class="col-sm-11">
                     <select class="form-select fc-primary" name="genre">
                         <option selected>Pilih Genre</option>
-                        <option value="True Crime" >True Crime</option>
-                        <option value="Personal Stories">Personal Stories</option>
-                        <option value="Culture">Culture</option>
-                        <option value="Society" >Society</option>
-                        <option value="Sports">Sports</option>
-                        <option value="Culture">Culture</option>
+                        {% for genre in genres %}
+                        <option value="{{ genre.genre }}">{{ genre.genre }}</option>
+                        {% endfor %}
                     </select>
                     </div>
                 </div>
-                <div class="mb-2 row">
+                <!-- <div class="mb-2 row">
                     <label class="col-sm-1 col-form-label fw-semibold" >Durasi</label>
                     <div class="col-sm-11">
                         <input class="form-control" type="text" name='durasi' aria-label="default input example">
                     </div>
-                </div>
+                </div> -->
                 <div class="mb-2 row">
                     <div class="col-sm-12 d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary">Buat Podcast</button>
